@@ -25,7 +25,7 @@ export default defineNuxtModule<ModuleOptions>({
 	},
 	setup(options, nuxt) {
 		const resolver = createResolver(import.meta.url);
-		nuxt.options.runtimeConfig.nuxtSession = defu<ModuleOptions, ModuleOptions[]>(nuxt.options.runtimeConfig.nuxtSession, options);
+		nuxt.options.runtimeConfig.nuxtSession = defu<Required<ModuleOptions>, ModuleOptions[]>(nuxt.options.runtimeConfig.nuxtSession, options);
 		addServerPlugin(resolver.resolve('./runtime/plugin'));
 	}
 });
