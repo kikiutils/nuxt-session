@@ -27,6 +27,6 @@ export const getStorage = (moduleOptions: UseStorageModuleOptions) => {
 
 	return createStorage({
 		// @ts-ignore
-		driver: drivers[moduleOptions.storage.driver](moduleOptions.storage.options)
+		driver: drivers[moduleOptions.storage.driver]({ ...moduleOptions.storage.options })
 	});
 };
