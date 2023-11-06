@@ -1,15 +1,31 @@
-import { addPlugin, createResolver, defineNuxtModule } from '@nuxt/kit';
+import { addServerPlugin, createResolver, defineNuxtModule } from '@nuxt/kit';
+import { defu } from 'defu';
 
-export interface ModuleOptions {}
+import type { ModuleOptions } from './types';
 
 export default defineNuxtModule<ModuleOptions>({
-	meta: {
-		name: '@kikiutils/nuxt-session',
-		configKey: 'nuxtSession'
+	defaults: {
+		cookie: {
+			httpOnly: true,
+			maxAge: 86400,
+			name: 'session',
+			path: '/',
+			sameSite: 'strict',
+			secure: true
+		},
+		storage: {
+			driver: 'memory',
+			keyLength: 16,
+			keyPrefix: 'session'
+		}
 	},
-	defaults: {},
+	meta: {
+		configKey: 'nuxtSession',
+		name: '@kikiutils/nuxt-session'
+	},
 	setup(options, nuxt) {
 		const resolver = createResolver(import.meta.url);
-		addPlugin(resolver.resolve('./runtime/plugin'));
+		nuxt.options.runtimeConfig.nuxtSession = defu<ModuleOptions, ModuleOptions[]>(nuxt.options.runtimeConfig.nuxtSession, options);
+		addServerPlugin(resolver.resolve('./runtime/plugin'));
 	}
 });
