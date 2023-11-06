@@ -1,4 +1,4 @@
-import { ModuleOptions } from './options';
+import type { ModuleOptions } from './options';
 
 declare module '@nuxt/schema' {
 	interface RuntimeConfig {
