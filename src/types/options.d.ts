@@ -1,9 +1,19 @@
+import type { FSStorageOptions } from 'unstorage/drivers/fs';
+import type { FSStorageOptions as FSLiteStorageOptions } from 'unstorage/drivers/fs-lite';
 import type { LRUDriverOptions } from 'unstorage/drivers/lru-cache';
 import type { RedisOptions } from 'unstorage/drivers/redis';
 
 export type ModuleOptions = UseCookieStorageModuleOptions | UseStorageModuleOptions;
 
 type SessionStorageOptions = (
+	| {
+			driver: 'fs';
+			options?: FSStorageOptions;
+	  }
+	| {
+			driver: 'fs-lite';
+			options?: FSLiteStorageOptions;
+	  }
 	| {
 			driver: 'lru-cache';
 			options?: LRUDriverOptions;
