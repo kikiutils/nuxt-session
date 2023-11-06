@@ -1,0 +1,47 @@
+{
+  "name": "@kikiutils/nuxt-session",
+  "version": "0.1.0",
+  "description": "Easy-to-use nuxt3 session.",
+  "license": "MIT",
+  "repository": "https://github.com/kiki-kanri/nuxt-session",
+  "type": "module",
+  "main": "./dist/module.cjs",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+    "lint": "eslint .",
+    "prepack": "nuxt-module-build build",
+    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "test": "vitest run",
+    "test:watch": "vitest watch"
+  },
+  "types": "./dist/types.d.ts",
+  "dependencies": {
+    "@nuxt/kit": "^3.8.0"
+  },
+  "devDependencies": {
+    "@kikiutils/prettierrc": "^1.2.0",
+    "@nuxt/devtools": "^1.0.0",
+    "@nuxt/eslint-config": "^0.2.0",
+    "@nuxt/module-builder": "^0.5.2",
+    "@nuxt/schema": "^3.8.0",
+    "@nuxt/test-utils": "^3.8.0",
+    "@types/node": "^20.8.10",
+    "changelogen": "^0.5.5",
+    "eslint": "^8.53.0",
+    "nuxt": "^3.8.0",
+    "vitest": "^0.34.6"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "prettier": "@kikiutils/prettierrc"
+}
