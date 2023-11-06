@@ -5,41 +5,7 @@ import type { RedisOptions } from 'unstorage/drivers/redis';
 
 export type ModuleOptions = UseCookieStorageModuleOptions | UseStorageModuleOptions;
 
-type SessionStorageOptions = (
-	| {
-			driver: 'fs';
-			options?: FSStorageOptions;
-	  }
-	| {
-			driver: 'fs-lite';
-			options?: FSLiteStorageOptions;
-	  }
-	| {
-			driver: 'lru-cache';
-			options?: LRUDriverOptions;
-	  }
-	| {
-			driver: 'memory';
-	  }
-	| {
-			driver: 'redis';
-			options?: RedisOptions;
-	  }
-) & {
-	/**
-	 * Storage key length without prefix.
-	 *
-	 * @default 16
-	 */
-	keyLength?: number;
-
-	/**
-	 * Storage key prefix.
-	 *
-	 * @default 'session'
-	 */
-	keyPrefix?: string;
-};
+type SessionStorageOptions = (SessionStorageOptions.Fs | SessionStorageOptions.FsLite | SessionStorageOptions.LruCache | SessionStorageOptions.Memory | SessionStorageOptions.Redis) & BaseSessionStorageOptions;
 
 interface BaseModuleOptions {
 	cookie?: {
@@ -75,6 +41,22 @@ interface BaseModuleOptions {
 	};
 }
 
+interface BaseSessionStorageOptions {
+	/**
+	 * Storage key length without prefix.
+	 *
+	 * @default 16
+	 */
+	keyLength?: number;
+
+	/**
+	 * Storage key prefix.
+	 *
+	 * @default 'session'
+	 */
+	keyPrefix?: string;
+}
+
 export interface UseCookieStorageModuleOptions extends BaseModuleOptions {
 	secret: string;
 	storage: 'cookie';
@@ -85,4 +67,30 @@ export interface UseStorageModuleOptions extends BaseModuleOptions {
 	 * @default { driver: 'memory' }
 	 */
 	storage?: SessionStorageOptions;
+}
+
+namespace SessionStorageOptions {
+	interface Fs {
+		driver: 'fs';
+		options?: FSStorageOptions;
+	}
+
+	interface FsLite {
+		driver: 'fs-lite';
+		options?: FSLiteStorageOptions;
+	}
+
+	interface LruCache {
+		driver: 'lru-cache';
+		options?: LRUDriverOptions;
+	}
+
+	interface Memory {
+		driver: 'memory';
+	}
+
+	interface Redis {
+		driver: 'redis';
+		options?: RedisOptions;
+	}
 }
