@@ -22,8 +22,8 @@
   "types": "./dist/types.d.ts",
   "dependencies": {
     "@nuxt/kit": "^3.8.1",
+    "nanoid": "^5.0.3",
     "on-change": "^4.0.2",
-    "uid": "^2.0.2",
     "unstorage": "^1.9.0"
   },
   "devDependencies": {

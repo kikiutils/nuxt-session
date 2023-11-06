@@ -1,4 +1,4 @@
-import { uid } from 'uid';
+import { nanoid } from 'nanoid';
 import { createStorage } from 'unstorage';
 import fsDriver from 'unstorage/drivers/fs';
 import fsLiteDriver from 'unstorage/drivers/fs-lite';
@@ -11,7 +11,7 @@ import type { UseStorageModuleOptions } from '../types';
 
 export const generateUniqueSessionStorageKey = async (storageOptions: Required<Required<UseStorageModuleOptions>['storage']>, storage: Storage<StorageValue>) => {
 	let key: string;
-	do key = `${storageOptions.keyPrefix}_${uid(storageOptions.keyLength)}`;
+	do key = `${storageOptions.keyPrefix}_${nanoid(storageOptions.keyLength)}`;
 	while (await storage.hasItem(key));
 	return key;
 };
