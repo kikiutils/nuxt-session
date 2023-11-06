@@ -21,19 +21,20 @@
   },
   "types": "./dist/types.d.ts",
   "dependencies": {
-    "@nuxt/kit": "^3.8.0",
+    "@nuxt/kit": "^3.8.1",
+    "on-change": "^4.0.2",
     "unstorage": "^1.9.0"
   },
   "devDependencies": {
     "@kikiutils/prettierrc": "^1.2.0",
     "@nuxt/eslint-config": "^0.2.0",
-    "@nuxt/module-builder": "^0.5.2",
-    "@nuxt/schema": "^3.8.0",
-    "@nuxt/test-utils": "^3.8.0",
+    "@nuxt/module-builder": "^0.5.3",
+    "@nuxt/schema": "^3.8.1",
+    "@nuxt/test-utils": "^3.8.1",
     "@types/node": "^20.8.10",
     "changelogen": "^0.5.5",
     "eslint": "^8.53.0",
-    "nuxt": "^3.8.0",
+    "nuxt": "^3.8.1",
     "vitest": "^0.34.6"
   },
   "exports": {
