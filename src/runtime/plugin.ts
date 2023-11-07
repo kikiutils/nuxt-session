@@ -11,7 +11,7 @@ const logger = useLogger();
 
 // function setupUseCookieStorageHooks(moduleOpions: Required<ModuleOptions>, nitroApp: NitroApp) {}
 
-function setupUseStorageHooks(moduleOpions: RequiredModuleOptions.UseUnstorage, nitroApp: NitroApp) {
+function setupUseUnstorageHooks(moduleOpions: RequiredModuleOptions.UseUnstorage, nitroApp: NitroApp) {
 	logger.info(`Use unjs/unstorage with the driver "${moduleOpions.storage.driver}" to store the session.`);
 	if (moduleOpions.storage.keyLength < 12) throw new Error('The storage key length must be 12 or more!');
 	const storage = getStorage(moduleOpions);
@@ -46,6 +46,6 @@ export default (nitroApp: NitroApp) => {
 	const runtimeConfig = useRuntimeConfig();
 	if (runtimeConfig.nuxtSession.storage.driver === 'cookie') return;
 	// if (runtimeConfig.nuxtSession.storage.driver === 'cookie') return setupUseCookieStorageHooks(runtimeConfig.nuxtSession, nitroApp);
-	setupUseStorageHooks(runtimeConfig.nuxtSession as RequiredModuleOptions.UseUnstorage, nitroApp);
+	setupUseUnstorageHooks(runtimeConfig.nuxtSession as RequiredModuleOptions.UseUnstorage, nitroApp);
 	logger.success('Nuxt session initialized successfully.');
 };
