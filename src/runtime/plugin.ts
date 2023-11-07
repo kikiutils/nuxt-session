@@ -16,7 +16,7 @@ function setupUseStorageHooks(moduleOpions: Required<ModuleOptions>, nitroApp: N
 	const storage = getStorage(moduleOpions);
 
 	nitroApp.hooks.hook('beforeResponse', async (event) => {
-		if (!event.context.sessionChanged) return;
+		if (!event.context.sessionChanged || !event.path.startsWith('/api')) return;
 		const sessionStorageKey = event.context.sessionStorageKey || (await generateUniqueSessionStorageKey(moduleOpions.storage as Required<Required<ModuleOptions>['storage']>, storage));
 		await storage.setItem(sessionStorageKey, event.context.session, { ttl: moduleOpions.cookie.maxAge });
 		setCookie(event, moduleOpions.cookie.name!, sessionStorageKey, moduleOpions.cookie);
