@@ -1,10 +1,10 @@
-import type { ModuleOptions } from './options';
+import type { RequiredModuleOptions } from './options';
 
 export interface H3EventContextSession {}
 
 declare module '@nuxt/schema' {
 	interface RuntimeConfig {
-		nuxtSession: Required<ModuleOptions>;
+		nuxtSession: RequiredModuleOptions;
 	}
 }
 

@@ -1,7 +1,7 @@
 import { addServerPlugin, createResolver, defineNuxtModule } from '@nuxt/kit';
 import { defu } from 'defu';
 
-import type { ModuleOptions } from './types';
+import type { ModuleOptions, RequiredModuleOptions } from './types';
 
 export default defineNuxtModule<ModuleOptions>({
 	defaults: {
@@ -25,7 +25,7 @@ export default defineNuxtModule<ModuleOptions>({
 	},
 	setup(options, nuxt) {
 		const resolver = createResolver(import.meta.url);
-		nuxt.options.runtimeConfig.nuxtSession = defu<Required<ModuleOptions>, ModuleOptions[]>(nuxt.options.runtimeConfig.nuxtSession, options);
+		nuxt.options.runtimeConfig.nuxtSession = defu<RequiredModuleOptions, ModuleOptions[]>(nuxt.options.runtimeConfig.nuxtSession, options);
 		addServerPlugin(resolver.resolve('./runtime/plugin'));
 	}
 });
