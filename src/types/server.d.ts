@@ -10,7 +10,7 @@ declare module '@nuxt/schema' {
 
 declare module 'h3' {
 	interface H3EventContext {
-		session: H3EventContextSession;
+		session: Partial<H3EventContextSession>;
 		sessionChanged?: true;
 		sessionStorageKey?: string;
 	}
