@@ -1,5 +1,39 @@
 # Changelog
 
+## v0.2.0
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v0.1.0...v0.1.1)
+
+### 🚀 Enhancements
+
+- Add logging for session initialization ([d4620ff](https://github.com/kiki-kanri/nuxt-session/commit/d4620ff))
+- **validation:** Add keyLength check ([53dcc33](https://github.com/kiki-kanri/nuxt-session/commit/53dcc33))
+
+### 🩹 Fixes
+
+- Remove optional chaining ([b96336b](https://github.com/kiki-kanri/nuxt-session/commit/b96336b))
+- Disallow setting key options in cookie storage mode ([7911a56](https://github.com/kiki-kanri/nuxt-session/commit/7911a56))
+- Add url check in beforeResponse handling ([5f8f6fb](https://github.com/kiki-kanri/nuxt-session/commit/5f8f6fb))
+- Remove incorrect type import ([31a8328](https://github.com/kiki-kanri/nuxt-session/commit/31a8328))
+- Make context.session properties optional ([7e14fc2](https://github.com/kiki-kanri/nuxt-session/commit/7e14fc2))
+
+### 💅 Refactors
+
+- Simplifying ModuleOptions type usage ([b16e736](https://github.com/kiki-kanri/nuxt-session/commit/b16e736))
+
+### 📖 Documentation
+
+- Enhance readme documentation ([89357f7](https://github.com/kiki-kanri/nuxt-session/commit/89357f7))
+
+### 🏡 Chore
+
+- Edit package description and tsconfig ([44a97b3](https://github.com/kiki-kanri/nuxt-session/commit/44a97b3))
+- Upgrade dependencies ([2ec04e6](https://github.com/kiki-kanri/nuxt-session/commit/2ec04e6))
+
+### ❤️ Contributors
+
+- kiki-kanri <a470666@gmail.com>
+
 ## v0.1.0
 
 ### 🚀 Enhancements
