@@ -13,6 +13,11 @@ const logger = useLogger();
 
 function setupUseStorageHooks(moduleOpions: Required<ModuleOptions>, nitroApp: NitroApp) {
 	logger.info(`Use unjs/unstorage with the driver "${moduleOpions.storage.driver}" to store the session.`);
+	if (moduleOpions.storage.driver !== 'cookie' && moduleOpions.storage.keyLength! < 12) {
+		logger.error('The storage key length must be 12 or more!');
+		throw new Error('The storage key length must be 12 or more!');
+	}
+
 	const storage = getStorage(moduleOpions);
 
 	nitroApp.hooks.hook('beforeResponse', async (event) => {
