@@ -4,12 +4,35 @@ import onChange from 'on-change';
 import { getCookie, setCookie } from 'h3';
 import type { NitroApp } from 'nitropack';
 
-import { generateUniqueSessionStorageKey, getStorage } from './utils';
-import type { H3EventContextSession, RequiredModuleOptions } from '../types';
+import { createSessionCipherFunctions, generateUniqueSessionStorageKey, getStorage } from './utils';
+import type { PartialH3EventContextSession, RequiredModuleOptions } from '../types';
 
 const logger = useLogger();
 
-// function setupUseCookieStorageHooks(moduleOpions: Required<ModuleOptions>, nitroApp: NitroApp) {}
+function setupUseCookieStorageHooks(moduleOpions: RequiredModuleOptions.UseCookieStorage, nitroApp: NitroApp) {
+	logger.info(`Use cookie to store the session.`);
+	const { decryptSession, encryptSession } = createSessionCipherFunctions(moduleOpions.storage.secret);
+	nitroApp.hooks.hook('beforeResponse', (event) => {
+		if (!event.context.sessionChanged || !event.path.startsWith('/api')) return;
+		const encryptedSession = encryptSession(event.context.session);
+		if (encryptedSession !== undefined) setCookie(event, moduleOpions.cookie.name, encryptedSession, moduleOpions.cookie);
+	});
+
+	nitroApp.hooks.hook('request', (event) => {
+		if (!event.path.startsWith('/api')) return;
+		const encryptedSession = getCookie(event, moduleOpions.cookie.name);
+		let sessionData: PartialH3EventContextSession = {};
+		if (encryptedSession) {
+			const decryptedSessionData = decryptSession(encryptedSession);
+			if (decryptedSessionData !== undefined) sessionData = decryptedSessionData;
+		}
+
+		event.context.session = onChange(sessionData, () => {
+			event.context.sessionChanged = true;
+			onChange.unsubscribe(event.context.session);
+		});
+	});
+}
 
 function setupUseUnstorageHooks(moduleOpions: RequiredModuleOptions.UseUnstorage, nitroApp: NitroApp) {
 	logger.info(`Use unjs/unstorage with the driver "${moduleOpions.storage.driver}" to store the session.`);
@@ -25,9 +48,9 @@ function setupUseUnstorageHooks(moduleOpions: RequiredModuleOptions.UseUnstorage
 	nitroApp.hooks.hook('request', async (event) => {
 		if (!event.path.startsWith('/api')) return;
 		const sessionStorageKey = getCookie(event, moduleOpions.cookie.name);
-		let sessionData: Partial<H3EventContextSession> = {};
+		let sessionData: PartialH3EventContextSession = {};
 		if (sessionStorageKey) {
-			const sessionStorageData = await storage.getItem<Partial<H3EventContextSession>>(sessionStorageKey);
+			const sessionStorageData = await storage.getItem<PartialH3EventContextSession>(sessionStorageKey);
 			if (sessionStorageData) {
 				event.context.sessionStorageKey = sessionStorageKey;
 				sessionData = sessionStorageData;
@@ -44,8 +67,7 @@ function setupUseUnstorageHooks(moduleOpions: RequiredModuleOptions.UseUnstorage
 export default (nitroApp: NitroApp) => {
 	logger.info('Initializing the Nuxt session...');
 	const runtimeConfig = useRuntimeConfig();
-	if (runtimeConfig.nuxtSession.storage.driver === 'cookie') return;
-	// if (runtimeConfig.nuxtSession.storage.driver === 'cookie') return setupUseCookieStorageHooks(runtimeConfig.nuxtSession, nitroApp);
-	setupUseUnstorageHooks(runtimeConfig.nuxtSession as RequiredModuleOptions.UseUnstorage, nitroApp);
+	if (runtimeConfig.nuxtSession.storage.driver === 'cookie') setupUseCookieStorageHooks(runtimeConfig.nuxtSession as RequiredModuleOptions.UseCookieStorage, nitroApp);
+	else setupUseUnstorageHooks(runtimeConfig.nuxtSession as RequiredModuleOptions.UseUnstorage, nitroApp);
 	logger.success('Nuxt session initialized successfully.');
 };
