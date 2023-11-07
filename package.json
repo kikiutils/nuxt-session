@@ -1,7 +1,7 @@
 {
   "name": "@kikiutils/nuxt-session",
   "version": "0.1.0",
-  "description": "Easy-to-use nuxt server side session.",
+  "description": "Easy-to-use nuxt server-side session.",
   "license": "MIT",
   "repository": "https://github.com/kiki-kanri/nuxt-session",
   "type": "module",
