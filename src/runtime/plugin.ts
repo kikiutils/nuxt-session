@@ -1,7 +1,7 @@
 import { useRuntimeConfig } from '#imports';
 import { useLogger } from '@nuxt/kit';
 import onChange from 'on-change';
-import { getCookie, setCookie } from 'h3';
+import { deleteCookie, getCookie, setCookie } from 'h3';
 import type { NitroApp } from 'nitropack';
 
 import { createSessionCipherFunctions, generateUniqueSessionStorageKey, getStorage } from './utils';
@@ -24,7 +24,8 @@ function setupUseCookieStorageHooks(moduleOpions: RequiredModuleOptions.UseCooki
 		let sessionData: PartialH3EventContextSession = {};
 		if (encryptedSession) {
 			const decryptedSessionData = decryptSession(encryptedSession);
-			if (decryptedSessionData !== undefined) sessionData = decryptedSessionData;
+			if (decryptedSessionData === undefined) deleteCookie(event, moduleOpions.cookie.name);
+			else sessionData = decryptedSessionData;
 		}
 
 		event.context.session = onChange(sessionData, () => {
@@ -51,7 +52,8 @@ function setupUseUnstorageHooks(moduleOpions: RequiredModuleOptions.UseUnstorage
 		let sessionData: PartialH3EventContextSession = {};
 		if (sessionStorageKey) {
 			const sessionStorageData = await storage.getItem<PartialH3EventContextSession>(sessionStorageKey);
-			if (sessionStorageData) {
+			if (sessionStorageData === null) deleteCookie(event, moduleOpions.cookie.name);
+			else {
 				event.context.sessionStorageKey = sessionStorageKey;
 				sessionData = sessionStorageData;
 			}
