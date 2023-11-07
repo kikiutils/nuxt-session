@@ -17,7 +17,7 @@ export const generateUniqueSessionStorageKey = async (storageOptions: Required<R
 };
 
 export const getStorage = (moduleOptions: ModuleOptions) => {
-	if (!moduleOptions.storage || moduleOptions.storage?.driver === 'memory') return createStorage({ driver: memoryDriver() });
+	if (!moduleOptions.storage || moduleOptions.storage.driver === 'memory') return createStorage({ driver: memoryDriver() });
 	const drivers = {
 		'fs-lite': fsLiteDriver,
 		'lru-cache': lruCacheDriver,
