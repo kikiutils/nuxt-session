@@ -1,6 +1,7 @@
 import type { RequiredModuleOptions } from './options';
 
-export interface H3EventContextSession {}
+interface H3EventContextSession {}
+export type PartialH3EventContextSession = Partial<H3EventContextSession>;
 
 declare module '@nuxt/schema' {
 	interface RuntimeConfig {
@@ -10,7 +11,7 @@ declare module '@nuxt/schema' {
 
 declare module 'h3' {
 	interface H3EventContext {
-		session: Partial<H3EventContextSession>;
+		session: PartialH3EventContextSession;
 		sessionChanged?: true;
 		sessionStorageKey?: string;
 	}
