@@ -7,16 +7,16 @@ import memoryDriver from 'unstorage/drivers/memory';
 import redisDriver from 'unstorage/drivers/redis';
 import type { Storage, StorageValue } from 'unstorage';
 
-import type { UseStorageModuleOptions } from '../types';
+import type { ModuleOptions } from '../types';
 
-export const generateUniqueSessionStorageKey = async (storageOptions: Required<Required<UseStorageModuleOptions>['storage']>, storage: Storage<StorageValue>) => {
+export const generateUniqueSessionStorageKey = async (storageOptions: Required<Required<ModuleOptions>['storage']>, storage: Storage<StorageValue>) => {
 	let key: string;
 	do key = `${storageOptions.keyPrefix}_${nanoid(storageOptions.keyLength)}`;
 	while (await storage.hasItem(key));
 	return key;
 };
 
-export const getStorage = (moduleOptions: UseStorageModuleOptions) => {
+export const getStorage = (moduleOptions: ModuleOptions) => {
 	if (!moduleOptions.storage || moduleOptions.storage?.driver === 'memory') return createStorage({ driver: memoryDriver() });
 	const drivers = {
 		'fs-lite': fsLiteDriver,
