@@ -1,4 +1,5 @@
 import { useRuntimeConfig } from '#imports';
+import { useLogger } from '@nuxt/kit';
 import onChange from 'on-change';
 import { getCookie, setCookie } from 'h3';
 import type { NitroApp } from 'nitropack';
@@ -6,9 +7,12 @@ import type { NitroApp } from 'nitropack';
 import { generateUniqueSessionStorageKey, getStorage } from './utils';
 import type { H3EventContextSession, ModuleOptions } from '../types';
 
+const logger = useLogger();
+
 // function setupUseCookieStorageHooks(moduleOpions: Required<ModuleOptions>, nitroApp: NitroApp) {}
 
 function setupUseStorageHooks(moduleOpions: Required<ModuleOptions>, nitroApp: NitroApp) {
+	logger.info(`Use unjs/unstorage with the driver "${moduleOpions.storage.driver}" to store the session.`);
 	const storage = getStorage(moduleOpions);
 
 	nitroApp.hooks.hook('beforeResponse', async (event) => {
@@ -38,8 +42,10 @@ function setupUseStorageHooks(moduleOpions: Required<ModuleOptions>, nitroApp: N
 }
 
 export default (nitroApp: NitroApp) => {
+	logger.info('Initializing the Nuxt session...');
 	const runtimeConfig = useRuntimeConfig();
 	if (runtimeConfig.nuxtSession.storage.driver === 'cookie') return;
 	// if (runtimeConfig.nuxtSession.storage.driver === 'cookie') return setupUseCookieStorageHooks(runtimeConfig.nuxtSession, nitroApp);
 	setupUseStorageHooks(runtimeConfig.nuxtSession, nitroApp);
+	logger.success('Nuxt session initialized successfully.');
 };
