@@ -3,23 +3,7 @@ import type { FSStorageOptions as FSLiteStorageOptions } from 'unstorage/drivers
 import type { LRUDriverOptions } from 'unstorage/drivers/lru-cache';
 import type { RedisOptions } from 'unstorage/drivers/redis';
 
-type SessionStorageOptions = (SessionStorageOptions.Cookie | SessionStorageOptions.Fs | SessionStorageOptions.FsLite | SessionStorageOptions.LruCache | SessionStorageOptions.Memory | SessionStorageOptions.Redis) & BaseSessionStorageOptions;
-
-interface BaseSessionStorageOptions {
-	/**
-	 * Storage key length without prefix.
-	 *
-	 * @default 16
-	 */
-	keyLength?: number;
-
-	/**
-	 * Storage key prefix.
-	 *
-	 * @default 'session'
-	 */
-	keyPrefix?: string;
-}
+type SessionStorageOptions = SessionStorageOptions.Cookie | ((SessionStorageOptions.Fs | SessionStorageOptions.FsLite | SessionStorageOptions.LruCache | SessionStorageOptions.Memory | SessionStorageOptions.Redis) & UseUnstorageSessionStorageOptions);
 
 export interface ModuleOptions {
 	cookie?: {
@@ -58,6 +42,22 @@ export interface ModuleOptions {
 	 * @default { driver: 'memory' }
 	 */
 	storage?: SessionStorageOptions;
+}
+
+interface UseUnstorageSessionStorageOptions {
+	/**
+	 * Storage key length without prefix.
+	 *
+	 * @default 16
+	 */
+	keyLength?: number;
+
+	/**
+	 * Storage key prefix.
+	 *
+	 * @default 'session'
+	 */
+	keyPrefix?: string;
 }
 
 namespace SessionStorageOptions {
