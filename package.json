@@ -40,6 +40,10 @@
     "nuxt": "^3.8.1",
     "vitest": "^0.34.6"
   },
+  "keywords": [
+    "nuxt",
+    "session"
+  ],
   "exports": {
     ".": {
       "types": "./dist/types.d.ts",
