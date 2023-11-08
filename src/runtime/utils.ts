@@ -1,12 +1,19 @@
 import crypto from 'crypto';
+import { H3Event, setCookie } from 'h3';
 import { createStorage } from 'unstorage';
 import fsDriver from 'unstorage/drivers/fs';
 import fsLiteDriver from 'unstorage/drivers/fs-lite';
 import lruCacheDriver from 'unstorage/drivers/lru-cache';
 import memoryDriver from 'unstorage/drivers/memory';
 import redisDriver from 'unstorage/drivers/redis';
+import type { EventHandlerRequest } from 'h3';
 
 import type { PartialH3EventContextSession, RequiredModuleOptions } from '../types';
+
+interface SessionStorageDataWithCreateTime {
+	createdAt: number;
+	data: PartialH3EventContextSession;
+}
 
 export const createSessionCipherFunctions = (secretKey: string) => {
 	if (secretKey.length !== 32) throw new Error('The secret length must be 32!');
@@ -39,19 +46,37 @@ export const createSessionCipherFunctions = (secretKey: string) => {
 
 export const createSessionStorageFunctions = (moduleOptions: RequiredModuleOptions.UseUnstorage) => {
 	const keyPrefix = moduleOptions.storage.keyPrefix;
+	const maxAgeMs = moduleOptions.maxAge * 1000;
 	const storage = getStorage(moduleOptions);
 	const readSessionData = async (sessionStorageKey: string) => {
-		const sessionStorageData = await storage.getItem<PartialH3EventContextSession>(`${keyPrefix}_${sessionStorageKey}`);
-		return sessionStorageData || undefined;
+		const itemKey = `${keyPrefix}_${sessionStorageKey}`;
+		const sessionStorageDataWithCreateTime = await storage.getItem<SessionStorageDataWithCreateTime>(itemKey);
+		if (sessionStorageDataWithCreateTime === null) return;
+		if (sessionStorageDataWithCreateTime.createdAt + maxAgeMs >= Date.now()) return sessionStorageDataWithCreateTime.data;
+		await storage.removeItem(itemKey);
 	};
 
 	const writeSessionData = async (sessionStorageKey: string, sessionData: PartialH3EventContextSession) => {
-		await storage.setItem<PartialH3EventContextSession>(`${keyPrefix}_${sessionStorageKey}`, sessionData);
+		await storage.setItem<SessionStorageDataWithCreateTime>(`${keyPrefix}_${sessionStorageKey}`, {
+			createdAt: Date.now(),
+			data: sessionData
+		});
 	};
 
 	return {
 		readSessionData,
 		writeSessionData
+	};
+};
+
+export const createSetCookieFunction = (moduleOptions: RequiredModuleOptions) => {
+	return (event: H3Event<EventHandlerRequest>, value: string) => {
+		const cookieOptions = {
+			...moduleOptions.cookie,
+			maxAge: moduleOptions.maxAge
+		};
+
+		return setCookie(event, moduleOptions.cookie.name, value, cookieOptions);
 	};
 };
 

@@ -7,12 +7,12 @@ export default defineNuxtModule<ModuleOptions>({
 	defaults: {
 		cookie: {
 			httpOnly: true,
-			maxAge: 86400,
 			name: 'session',
 			path: '/',
 			sameSite: 'strict',
 			secure: true
 		},
+		maxAge: 86400,
 		storage: {
 			driver: 'memory',
 			keyLength: 16,

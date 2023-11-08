@@ -15,11 +15,6 @@ export interface ModuleOptions {
 		httpOnly?: boolean;
 
 		/**
-		 * @default 86400
-		 */
-		maxAge?: number;
-
-		/**
 		 * @default 'session'
 		 */
 		name?: string;
@@ -39,6 +34,11 @@ export interface ModuleOptions {
 		 */
 		secure?: boolean;
 	};
+
+	/**
+	 * @default 86400
+	 */
+	maxAge?: number;
 
 	/**
 	 * Storage session data options.
