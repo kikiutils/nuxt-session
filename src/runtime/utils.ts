@@ -1,12 +1,11 @@
 import crypto from 'crypto';
-import { H3Event, setCookie } from 'h3';
+import { setCookie } from 'h3';
 import { createStorage } from 'unstorage';
 import fsDriver from 'unstorage/drivers/fs';
 import fsLiteDriver from 'unstorage/drivers/fs-lite';
 import lruCacheDriver from 'unstorage/drivers/lru-cache';
 import memoryDriver from 'unstorage/drivers/memory';
 import redisDriver from 'unstorage/drivers/redis';
-import type { EventHandlerRequest } from 'h3';
 import type { StorageValue } from 'unstorage';
 
 import type { PartialH3EventContextSession, RequiredModuleOptions } from '../types';
@@ -70,7 +69,7 @@ export const createSessionStorageFunctions = (moduleOptions: RequiredModuleOptio
 };
 
 export const createSetCookieFunction = (moduleOptions: RequiredModuleOptions) => {
-	return (event: H3Event<EventHandlerRequest>, value: string) => {
+	return (event: H3RequestEvent, value: string) => {
 		const cookieOptions = {
 			...moduleOptions.cookie,
 			maxAge: moduleOptions.maxAge
