@@ -140,11 +140,6 @@ Refer to this [option](#storagedriver) to configure the storage mode.
 - **Type:** `boolean`
 - **Default:** `true`
 
-### cookie.maxAge
-
-- **Type:** `number`
-- **Default:** `86400`
-
 ### cookie.name
 
 - **Type:** `string`
@@ -164,6 +159,15 @@ Refer to this [option](#storagedriver) to configure the storage mode.
 
 - **Type:** `boolean`
 - **Default:** `true`
+
+### maxAge
+
+- **Type:** `number`
+- **Default:** `86400`
+
+Session expiration time in seconds.
+
+It also sets the cookie expiration time.
 
 ### storage.driver
 
