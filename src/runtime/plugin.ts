@@ -23,14 +23,14 @@ function setupUseCookieStorageHooks(moduleOptions: RequiredModuleOptions.UseCook
 	nitroApp.hooks.hook('request', (event) => {
 		if (!event.path.startsWith('/api')) return;
 		const encryptedSession = getCookie(event, moduleOptions.cookie.name);
-		let sessionData: PartialH3EventContextSession = {};
+		let session: PartialH3EventContextSession = {};
 		if (encryptedSession) {
-			const decryptedSessionData = decryptSession(encryptedSession);
-			if (decryptedSessionData === undefined) deleteCookie(event, moduleOptions.cookie.name);
-			else sessionData = decryptedSessionData;
+			const decryptedSession = decryptSession(encryptedSession);
+			if (decryptedSession === undefined) deleteCookie(event, moduleOptions.cookie.name);
+			else session = decryptedSession;
 		}
 
-		event.context.session = onChange(sessionData, () => {
+		event.context.session = onChange(session, () => {
 			event.context.sessionChanged = true;
 			onChange.unsubscribe(event.context.session);
 		});
@@ -40,29 +40,29 @@ function setupUseCookieStorageHooks(moduleOptions: RequiredModuleOptions.UseCook
 function setupUseUnstorageHooks(moduleOptions: RequiredModuleOptions.UseUnstorage, nitroApp: NitroApp) {
 	logger.info(`Use unjs/unstorage with the driver "${moduleOptions.storage.driver}" to store the session.`);
 	if (moduleOptions.storage.keyLength < 12) throw new Error('The storage key length must be 12 or more!');
-	const { readSessionData, writeSessionData } = createSessionStorageFunctions(moduleOptions);
+	const { readSessionFromStorage, writeSessionToStorage } = createSessionStorageFunctions(moduleOptions);
 	const setCookie = createSetCookieFunction(moduleOptions);
 	nitroApp.hooks.hook('beforeResponse', async (event) => {
 		if (!event.context.sessionChanged || !event.path.startsWith('/api')) return;
 		const sessionStorageKey = event.context.sessionStorageKey || nanoid(moduleOptions.storage.keyLength);
-		await writeSessionData(sessionStorageKey, event.context.session);
+		await writeSessionToStorage(sessionStorageKey, event.context.session);
 		setCookie(event, sessionStorageKey);
 	});
 
 	nitroApp.hooks.hook('request', async (event) => {
 		if (!event.path.startsWith('/api')) return;
 		const sessionStorageKey = getCookie(event, moduleOptions.cookie.name);
-		let sessionData: PartialH3EventContextSession = {};
+		let session: PartialH3EventContextSession = {};
 		if (sessionStorageKey) {
-			const sessionStorageData = await readSessionData(sessionStorageKey);
-			if (sessionStorageData === undefined) deleteCookie(event, moduleOptions.cookie.name);
+			const storedSession = await readSessionFromStorage(sessionStorageKey);
+			if (storedSession === undefined) deleteCookie(event, moduleOptions.cookie.name);
 			else {
 				event.context.sessionStorageKey = sessionStorageKey;
-				sessionData = sessionStorageData;
+				session = storedSession;
 			}
 		}
 
-		event.context.session = onChange(sessionData, () => {
+		event.context.session = onChange(session, () => {
 			event.context.sessionChanged = true;
 			onChange.unsubscribe(event.context.session);
 		});

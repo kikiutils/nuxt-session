@@ -7,10 +7,11 @@ import lruCacheDriver from 'unstorage/drivers/lru-cache';
 import memoryDriver from 'unstorage/drivers/memory';
 import redisDriver from 'unstorage/drivers/redis';
 import type { EventHandlerRequest } from 'h3';
+import type { StorageValue } from 'unstorage';
 
 import type { PartialH3EventContextSession, RequiredModuleOptions } from '../types';
 
-interface SessionStorageDataWithCreateTime {
+interface StorageSessionWithCreatedTime {
 	createdAt: number;
 	data: PartialH3EventContextSession;
 }
@@ -19,22 +20,21 @@ export const createSessionCipherFunctions = (secretKey: string) => {
 	if (secretKey.length !== 32) throw new Error('The secret length must be 32!');
 	const algorithm = 'aes-256-cbc';
 	const key = Buffer.from(secretKey, 'utf-8');
-	const ivLength = 16;
-	const decryptSession = (encryptedSession: string): PartialH3EventContextSession | undefined => {
+	const decryptSession = (encryptedSession: string) => {
 		const textParts = encryptedSession.split(':');
 		if (textParts.length === 1) return;
 		try {
 			const iv = Buffer.from(textParts.shift()!, 'hex');
 			const decipher = crypto.createDecipheriv(algorithm, key, iv);
-			return JSON.parse(`${decipher.update(textParts.join(':'), 'hex', 'utf8')}${decipher.final('utf8')}`);
+			return JSON.parse(`${decipher.update(textParts.join(':'), 'hex', 'utf8')}${decipher.final('utf8')}`) as PartialH3EventContextSession;
 		} catch (error) {}
 	};
 
-	const encryptSession = (sessionData: PartialH3EventContextSession) => {
-		const iv = crypto.randomBytes(ivLength);
+	const encryptSession = (session: PartialH3EventContextSession) => {
+		const iv = crypto.randomBytes(16);
 		const cipher = crypto.createCipheriv(algorithm, key, iv);
 		try {
-			return `${iv.toString('hex')}:${cipher.update(JSON.stringify(sessionData), 'utf8', 'hex')}${cipher.final('hex')}`;
+			return `${iv.toString('hex')}:${cipher.update(JSON.stringify(session), 'utf8', 'hex')}${cipher.final('hex')}`;
 		} catch (error) {}
 	};
 
@@ -47,25 +47,25 @@ export const createSessionCipherFunctions = (secretKey: string) => {
 export const createSessionStorageFunctions = (moduleOptions: RequiredModuleOptions.UseUnstorage) => {
 	const keyPrefix = moduleOptions.storage.keyPrefix;
 	const maxAgeMs = moduleOptions.maxAge * 1000;
-	const storage = getStorage(moduleOptions);
-	const readSessionData = async (sessionStorageKey: string) => {
+	const storage = getStorage<StorageSessionWithCreatedTime>(moduleOptions);
+	const readSessionFromStorage = async (sessionStorageKey: string) => {
 		const itemKey = `${keyPrefix}_${sessionStorageKey}`;
-		const sessionStorageDataWithCreateTime = await storage.getItem<SessionStorageDataWithCreateTime>(itemKey);
-		if (sessionStorageDataWithCreateTime === null) return;
-		if (sessionStorageDataWithCreateTime.createdAt + maxAgeMs >= Date.now()) return sessionStorageDataWithCreateTime.data;
+		const sessionWithCreatedTime = await storage.getItem(itemKey);
+		if (sessionWithCreatedTime === null) return;
+		if (sessionWithCreatedTime.createdAt + maxAgeMs >= Date.now()) return sessionWithCreatedTime.data;
 		await storage.removeItem(itemKey);
 	};
 
-	const writeSessionData = async (sessionStorageKey: string, sessionData: PartialH3EventContextSession) => {
-		await storage.setItem<SessionStorageDataWithCreateTime>(`${keyPrefix}_${sessionStorageKey}`, {
+	const writeSessionToStorage = async (sessionStorageKey: string, session: PartialH3EventContextSession) => {
+		await storage.setItem(`${keyPrefix}_${sessionStorageKey}`, {
 			createdAt: Date.now(),
-			data: sessionData
+			data: session
 		});
 	};
 
 	return {
-		readSessionData,
-		writeSessionData
+		readSessionFromStorage,
+		writeSessionToStorage
 	};
 };
 
@@ -80,8 +80,8 @@ export const createSetCookieFunction = (moduleOptions: RequiredModuleOptions) =>
 	};
 };
 
-const getStorage = (moduleOptions: RequiredModuleOptions.UseUnstorage) => {
-	if (moduleOptions.storage.driver === 'memory') return createStorage({ driver: memoryDriver() });
+const getStorage = <T extends StorageValue>(moduleOptions: RequiredModuleOptions.UseUnstorage) => {
+	if (moduleOptions.storage.driver === 'memory') return createStorage<T>({ driver: memoryDriver() });
 	const drivers = {
 		'fs-lite': fsLiteDriver,
 		'lru-cache': lruCacheDriver,
@@ -89,7 +89,7 @@ const getStorage = (moduleOptions: RequiredModuleOptions.UseUnstorage) => {
 		redis: redisDriver
 	} as const;
 
-	return createStorage({
+	return createStorage<T>({
 		// @ts-ignore
 		driver: drivers[moduleOptions.storage.driver]({ ...moduleOptions.storage.options })
 	});
