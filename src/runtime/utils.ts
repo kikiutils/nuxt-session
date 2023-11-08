@@ -1,12 +1,10 @@
 import crypto from 'crypto';
-import { nanoid } from 'nanoid';
 import { createStorage } from 'unstorage';
 import fsDriver from 'unstorage/drivers/fs';
 import fsLiteDriver from 'unstorage/drivers/fs-lite';
 import lruCacheDriver from 'unstorage/drivers/lru-cache';
 import memoryDriver from 'unstorage/drivers/memory';
 import redisDriver from 'unstorage/drivers/redis';
-import type { Storage, StorageValue } from 'unstorage';
 
 import type { PartialH3EventContextSession, RequiredModuleOptions } from '../types';
 
@@ -39,14 +37,25 @@ export const createSessionCipherFunctions = (secretKey: string) => {
 	};
 };
 
-export const generateUniqueSessionStorageKey = async (storageOptions: RequiredModuleOptions.UseUnstorage['storage'], storage: Storage<StorageValue>) => {
-	let key: string;
-	do key = `${storageOptions.keyPrefix}_${nanoid(storageOptions.keyLength)}`;
-	while (await storage.hasItem(key));
-	return key;
+export const createSessionStorageFunctions = (moduleOptions: RequiredModuleOptions.UseUnstorage) => {
+	const keyPrefix = moduleOptions.storage.keyPrefix;
+	const storage = getStorage(moduleOptions);
+	const readSessionData = async (sessionStorageKey: string) => {
+		const sessionStorageData = await storage.getItem<PartialH3EventContextSession>(`${keyPrefix}_${sessionStorageKey}`);
+		return sessionStorageData || undefined;
+	};
+
+	const writeSessionData = async (sessionStorageKey: string, sessionData: PartialH3EventContextSession) => {
+		await storage.setItem<PartialH3EventContextSession>(`${keyPrefix}_${sessionStorageKey}`, sessionData);
+	};
+
+	return {
+		readSessionData,
+		writeSessionData
+	};
 };
 
-export const getStorage = (moduleOptions: RequiredModuleOptions.UseUnstorage) => {
+const getStorage = (moduleOptions: RequiredModuleOptions.UseUnstorage) => {
 	if (moduleOptions.storage.driver === 'memory') return createStorage({ driver: memoryDriver() });
 	const drivers = {
 		'fs-lite': fsLiteDriver,
