@@ -15,8 +15,8 @@ Easy-to-use nuxt server-side session.
 
 - ✔️ Continuous session between requests using cookies
 - ✔️ Available in server-side middleware
-- ✔️ Use cookie to storage session data
-- ✔️ Use [unjs/unstorage](https://github.com/unjs/unstorage) drivers to storage session data
+- ✔️ Using cookies to store session data
+- ✔️ Using [unjs/unstorage](https://github.com/unjs/unstorage) drivers to store session data
 - ✔️ Typescript support
 
 ## Quick Setup
@@ -109,17 +109,17 @@ interface H3EventContextSession {
 
 export declare module 'h3' {
   interface H3EventContext {
-		session: Partial<H3EventContextSession>;
-	}
+    session: Partial<H3EventContextSession>;
+  }
 }
 ```
 
-For reason, context.session must be a Partial attribute, since it is initialized with an empty object when session is not set.
+For this reason, `context.session` is typed as `Partial<H3EventContextSession>` because it may be initialized as an empty object when a session is not set.
 
 ## Storage Mode
 
-This package provides two ways to store session data:
-- cookie (Not yet implemented)
+The package provides two methods for storing session data:
+- cookie
 - unjs/unstorage driver
   - fs
   - fs-lite
@@ -127,51 +127,45 @@ This package provides two ways to store session data:
   - memory
   - redis
 
-If you choose cookie, the data will be encrypted and stored in the cookie, and you need to set the encryption key.
+If you select cookie, the data will be encrypted and stored in the cookie and you will need to set the [encryption key](#storagesecret).
 
-If you choose the unstorage driver, the data will be stored as key-value pairs but not encrypted.
+If you select the unstorage driver, the data will be stored as key-value pairs but not encrypted.
 
 Refer to this [option](#storagedriver) to configure the storage mode.
 
 ## Configuration
 
-### Cookie
-
-#### cookie.httpOnly
+### cookie.httpOnly
 
 - **Type:** `boolean`
 - **Default:** `true`
 
-#### cookie.maxAge
+### cookie.maxAge
 
 - **Type:** `number`
 - **Default:** `86400`
 
-Set the expiration time of the cookie (in seconds), if the storage mode uses unjs/unstorage, it will also use this value as the ttl for storage.
-
-#### cookie.name
+### cookie.name
 
 - **Type:** `string`
 - **Default:** `session`
 
-#### cookie.path
+### cookie.path
 
 - **Type:** `string`
 - **Default:** `/`
 
-#### cookie.sameSite
+### cookie.sameSite
 
 - **Type:** `lax | none | strict`
 - **Default:** `strict`
 
-#### cookie.secure
+### cookie.secure
 
 - **Type:** `boolean`
 - **Default:** `true`
 
-### Storage
-
-#### storage.driver
+### storage.driver
 
 - **Type:** `cookie | fs | fs-lite | lru-cache | memory | redis`
 - **Default:** `memory`
@@ -180,7 +174,7 @@ Choose how session content is stored.
 
 If set as a cookie, the [secret](#storagesecret) option must be set and none of the other options can be set.
 
-#### storage.keyLength
+### storage.keyLength
 
 - **Type:** `number`
 - **Default:** `16`
@@ -189,14 +183,14 @@ Set the length of the session storage key (excluding the prefix).
 
 This value should not be set to less than 12, otherwise it is easy for an attacker to brute-force it.
 
-#### storage.keyPrefix
+### storage.keyPrefix
 
 - **Type:** `string`
 - **Default:** `session`
 
 Set the prefix of the session storage key.
 
-#### storage.options
+### storage.options
 
 Setting options according to driver type.
 
@@ -216,13 +210,13 @@ export default defineNuxtConfig({
 });
 ```
 
-#### storage.secret
+### storage.secret
 
 - **Type:** `string`
 
 Only available when driver is set to `cookie`.
 
-When setting the key to be used for session encryption, make sure that the key will not be compromised and that the key length is not too short, 16 or more characters is recommended.
+The secret must be set to 32 characters and ensures that it is not leaked anywhere.
 
 `nuxt.config.ts`
 ```typescript

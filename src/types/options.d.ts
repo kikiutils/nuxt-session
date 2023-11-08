@@ -41,16 +41,15 @@ export interface ModuleOptions {
 	};
 
 	/**
+	 * Storage session data options.
+	 *
 	 * @default { driver: 'memory' }
 	 */
 	storage?: SessionStorageOptions;
 }
 
 export interface UseCookieStorageModuleOptions extends ModuleOptions {
-	storage: {
-		driver: 'cookie';
-		secret: string;
-	};
+	storage: SessionStorageOptions.Cookie;
 }
 
 export interface UseUnstorageModuleOptions extends ModuleOptions {
@@ -59,14 +58,16 @@ export interface UseUnstorageModuleOptions extends ModuleOptions {
 
 interface UseUnstorageSessionStorageOptions {
 	/**
-	 * Storage key length without prefix.
+	 * Length of the storage key (excluding the prefix).
+	 *
+	 * Should not be set to less than 12.
 	 *
 	 * @default 16
 	 */
 	keyLength?: number;
 
 	/**
-	 * Storage key prefix.
+	 * Prefix of the storage key.
 	 *
 	 * @default 'session'
 	 */
@@ -81,6 +82,10 @@ export namespace RequiredModuleOptions {
 namespace SessionStorageOptions {
 	interface Cookie {
 		driver: 'cookie';
+
+		/**
+		 * Must be a 32-character long secure password for encryption and decryption.
+		 */
 		secret: string;
 	}
 
