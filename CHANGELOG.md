@@ -1,5 +1,42 @@
 # Changelog
 
+## v0.3.0
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v0.2.0...v0.3.0)
+
+### 🚀 Enhancements
+
+- Add session data encryption and decryption functions ([cddf9d5](https://github.com/kiki-kanri/nuxt-session/commit/cddf9d5))
+- Update playground api url and add test button ([2a79219](https://github.com/kiki-kanri/nuxt-session/commit/2a79219))
+- Add cookie storage for session data ([2037f08](https://github.com/kiki-kanri/nuxt-session/commit/2037f08))
+- Implement session ttl functionality ([e3e0ffe](https://github.com/kiki-kanri/nuxt-session/commit/e3e0ffe))
+
+### 🩹 Fixes
+
+- Make module options type required in setup ([166f42b](https://github.com/kiki-kanri/nuxt-session/commit/166f42b))
+- Delete session cookie when session data is unobtainable ([1a373ea](https://github.com/kiki-kanri/nuxt-session/commit/1a373ea))
+
+### 💅 Refactors
+
+- Rename setup function ([1805d3c](https://github.com/kiki-kanri/nuxt-session/commit/1805d3c))
+- Refactor codebase for session storage operations ([7d9c8ff](https://github.com/kiki-kanri/nuxt-session/commit/7d9c8ff))
+- Rename functions and variables ([98eee34](https://github.com/kiki-kanri/nuxt-session/commit/98eee34))
+
+### 📖 Documentation
+
+- Update README and add interface property descriptions ([f4566a0](https://github.com/kiki-kanri/nuxt-session/commit/f4566a0))
+- Update readme ([fac6646](https://github.com/kiki-kanri/nuxt-session/commit/fac6646))
+
+### 🏡 Chore
+
+- Add PartialH3EventContextSession type ([b79d721](https://github.com/kiki-kanri/nuxt-session/commit/b79d721))
+- Upgrade dependencies ([797d204](https://github.com/kiki-kanri/nuxt-session/commit/797d204))
+- Add keywords in package.json ([8824679](https://github.com/kiki-kanri/nuxt-session/commit/8824679))
+
+### ❤️ Contributors
+
+- kiki-kanri <a470666@gmail.com>
+
 ## v0.2.0
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v0.1.0...v0.1.1)
