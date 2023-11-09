@@ -3,6 +3,8 @@ import { defu } from 'defu';
 
 import type { ModuleOptions, RequiredModuleOptions } from './types';
 
+export type { H3EventContextSession } from './types/session';
+
 export default defineNuxtModule<ModuleOptions>({
 	defaults: {
 		cookie: {
