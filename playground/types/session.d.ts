@@ -1,5 +1,7 @@
-export declare module '../../src/types/server.d.ts' {
+declare module '../../src/types/session.d.ts' {
 	interface H3EventContextSession {
 		testValue?: number;
 	}
 }
+
+export {};
