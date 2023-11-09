@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import { setCookie } from 'h3';
+import onChange from 'on-change';
 import { createStorage } from 'unstorage';
 import fsDriver from 'unstorage/drivers/fs';
 import fsLiteDriver from 'unstorage/drivers/fs-lite';
@@ -91,5 +92,13 @@ const getStorage = <T extends StorageValue>(moduleOptions: RequiredModuleOptions
 	return createStorage<T>({
 		// @ts-ignore
 		driver: drivers[moduleOptions.storage.driver]({ ...moduleOptions.storage.options })
+	});
+};
+
+export const setupH3EventContextSession = (event: H3RequestEvent, session: PartialH3EventContextSession, onChangeCallback?: (event: H3RequestEvent) => void) => {
+	event.context.session = onChange(session, () => {
+		event.context.sessionChanged = true;
+		onChangeCallback?.(event);
+		onChange.unsubscribe(event.context.session);
 	});
 };
