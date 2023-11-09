@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { setCookie } from 'h3';
+import { H3Event, setCookie } from 'h3';
 import onChange from 'on-change';
 import { createStorage } from 'unstorage';
 import fsDriver from 'unstorage/drivers/fs';
@@ -72,7 +72,7 @@ export const createSessionStorageFunctions = (moduleOptions: RequiredModuleOptio
 };
 
 export const createSetCookieFunction = (moduleOptions: RequiredModuleOptions) => {
-	return (event: H3RequestEvent, value: string) => {
+	return (event: H3Event, value: string) => {
 		const cookieOptions = {
 			...moduleOptions.cookie,
 			maxAge: moduleOptions.maxAge
@@ -97,7 +97,7 @@ const getStorage = <T extends StorageValue>(moduleOptions: RequiredModuleOptions
 	});
 };
 
-export const setupH3EventContextSession = (event: H3RequestEvent, session: PartialH3EventContextSession, onChangeCallback?: (event: H3RequestEvent) => void) => {
+export const setupH3EventContextSession = (event: H3Event, session: PartialH3EventContextSession, onChangeCallback?: (event: H3Event) => void) => {
 	event.context.session = onChange(session, () => {
 		event.context.sessionChanged = true;
 		onChangeCallback?.(event);
