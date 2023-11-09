@@ -1,5 +1,37 @@
 # Changelog
 
+## v0.4.0
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v0.3.0...v0.4.0)
+
+### 🚀 Enhancements
+
+- Add global H3Event type ([25cb18c](https://github.com/kiki-kanri/nuxt-session/commit/25cb18c))
+- Add setup event context session function ([5a6f7d9](https://github.com/kiki-kanri/nuxt-session/commit/5a6f7d9))
+- Add clear session composable function ([29ce0f7](https://github.com/kiki-kanri/nuxt-session/commit/29ce0f7))
+- Add clear session playground examples ([6054b8d](https://github.com/kiki-kanri/nuxt-session/commit/6054b8d))
+
+### 🩹 Fixes
+
+- Remove global types to resolve build errors ([973a1d5](https://github.com/kiki-kanri/nuxt-session/commit/973a1d5))
+
+### 💅 Refactors
+
+- Use function to set session ([d1bfa18](https://github.com/kiki-kanri/nuxt-session/commit/d1bfa18))
+
+### 📖 Documentation
+
+- Update readme ([c241ff7](https://github.com/kiki-kanri/nuxt-session/commit/c241ff7))
+
+### 🏡 Chore
+
+- Remove eslint and test ([170d5ba](https://github.com/kiki-kanri/nuxt-session/commit/170d5ba))
+- Upgrade dependencies ([fb85098](https://github.com/kiki-kanri/nuxt-session/commit/fb85098))
+
+### ❤️ Contributors
+
+- kiki-kanri <a470666@gmail.com>
+
 ## v0.3.0
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v0.2.0...v0.3.0)
