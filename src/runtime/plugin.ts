@@ -15,6 +15,7 @@ function setupUseCookieStorageHooks(moduleOptions: RequiredModuleOptions.UseCook
 	const setCookie = createSetCookieFunction(moduleOptions);
 	nitroApp.hooks.hook('beforeResponse', (event) => {
 		if (!event.context.sessionChanged || !event.path.startsWith('/api')) return;
+		if (event.context.sessionCleared) return deleteCookie(event, moduleOptions.cookie.name);
 		const encryptedSession = encryptSession(event.context.session);
 		if (encryptedSession !== undefined) setCookie(event, encryptedSession);
 	});
@@ -36,10 +37,16 @@ function setupUseCookieStorageHooks(moduleOptions: RequiredModuleOptions.UseCook
 function setupUseUnstorageHooks(moduleOptions: RequiredModuleOptions.UseUnstorage, nitroApp: NitroApp) {
 	logger.info(`Use unjs/unstorage with the driver "${moduleOptions.storage.driver}" to store the session.`);
 	if (moduleOptions.storage.keyLength < 12) throw new Error('The storage key length must be 12 or more!');
-	const { readSessionFromStorage, writeSessionToStorage } = createSessionStorageFunctions(moduleOptions);
+	const { readSessionFromStorage, removeStorageSession, writeSessionToStorage } = createSessionStorageFunctions(moduleOptions);
 	const setCookie = createSetCookieFunction(moduleOptions);
 	nitroApp.hooks.hook('beforeResponse', async (event) => {
 		if (!event.context.sessionChanged || !event.path.startsWith('/api')) return;
+		if (event.context.sessionCleared) {
+			if (event.context.sessionStorageKey === undefined) return;
+			await removeStorageSession(event.context.sessionStorageKey);
+			return deleteCookie(event, moduleOptions.cookie.name);
+		}
+
 		const sessionStorageKey = event.context.sessionStorageKey || nanoid(moduleOptions.storage.keyLength);
 		await writeSessionToStorage(sessionStorageKey, event.context.session);
 		setCookie(event, sessionStorageKey);

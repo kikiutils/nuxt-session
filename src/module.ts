@@ -1,4 +1,4 @@
-import { addServerPlugin, createResolver, defineNuxtModule } from '@nuxt/kit';
+import { addServerImportsDir, addServerPlugin, createResolver, defineNuxtModule } from '@nuxt/kit';
 import { defu } from 'defu';
 
 import type { ModuleOptions, RequiredModuleOptions } from './types';
@@ -26,6 +26,7 @@ export default defineNuxtModule<ModuleOptions>({
 	setup(options, nuxt) {
 		const resolver = createResolver(import.meta.url);
 		nuxt.options.runtimeConfig.nuxtSession = defu<RequiredModuleOptions, ModuleOptions[]>(nuxt.options.runtimeConfig.nuxtSession, options);
+		addServerImportsDir(resolver.resolve('./runtime/composables'));
 		addServerPlugin(resolver.resolve('./runtime/plugin'));
 	}
 });

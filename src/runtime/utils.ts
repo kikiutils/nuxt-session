@@ -56,6 +56,7 @@ export const createSessionStorageFunctions = (moduleOptions: RequiredModuleOptio
 		await storage.removeItem(itemKey);
 	};
 
+	const removeStorageSession = async (sessionStorageKey: string) => storage.removeItem(`${keyPrefix}_${sessionStorageKey}`);
 	const writeSessionToStorage = async (sessionStorageKey: string, session: PartialH3EventContextSession) => {
 		await storage.setItem(`${keyPrefix}_${sessionStorageKey}`, {
 			createdAt: Date.now(),
@@ -65,6 +66,7 @@ export const createSessionStorageFunctions = (moduleOptions: RequiredModuleOptio
 
 	return {
 		readSessionFromStorage,
+		removeStorageSession,
 		writeSessionToStorage
 	};
 };
