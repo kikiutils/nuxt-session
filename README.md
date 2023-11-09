@@ -15,6 +15,7 @@ Easy-to-use nuxt server-side session.
 
 - ✔️ Continuous session between requests using cookies
 - ✔️ Available in server-side middleware
+- ✔️ Auto save session
 - ✔️ Using cookies to store session data
 - ✔️ Using [unjs/unstorage](https://github.com/unjs/unstorage) drivers to store session data
 - ✔️ Typescript support
@@ -76,6 +77,16 @@ export default defineEventHandler((event) => {
 });
 ```
 
+You can use `clearH3EventContextSession` composable to clear session.
+
+```typescript
+export default defineEventHandler((event) => {
+  clearH3EventContextSession(event);
+  // Remaining operations...
+  return 'success';
+});
+```
+
 Memory storage is used by default, which means that all sessions will be lost when the server is restarted.
 
 To change to another storage method, please refer to the [storage mode](#storage-mode) below.
@@ -104,7 +115,7 @@ To get full support for typescript, you need to add a new .d.ts file under your 
 `types/session.d.ts`
 ```typescript
 interface H3EventContextSession {
-  // Remaining operations...
+  // Define your session attributes.
 }
 
 export declare module 'h3' {
@@ -114,7 +125,7 @@ export declare module 'h3' {
 }
 ```
 
-For this reason, `context.session` is typed as `Partial<H3EventContextSession>` because it may be initialized as an empty object when a session is not set.
+Because it initializes with an empty object when no session is set, `context.session` type must be set to `Partial<H3EventContextSession>`.
 
 ## Storage Mode
 
