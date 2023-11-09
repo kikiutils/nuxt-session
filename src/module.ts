@@ -28,7 +28,7 @@ export default defineNuxtModule<ModuleOptions>({
 	setup(options, nuxt) {
 		const resolver = createResolver(import.meta.url);
 		nuxt.options.runtimeConfig.nuxtSession = defu<RequiredModuleOptions, ModuleOptions[]>(nuxt.options.runtimeConfig.nuxtSession, options);
-		addServerImportsDir(resolver.resolve('./runtime/composables'));
-		addServerPlugin(resolver.resolve('./runtime/plugin'));
+		addServerImportsDir(resolver.resolve('./runtime/server/utils'));
+		addServerPlugin(resolver.resolve('./runtime/server/plugins/session.ts'));
 	}
 });

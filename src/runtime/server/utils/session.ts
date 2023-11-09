@@ -1,7 +1,7 @@
 import { H3Event } from 'h3';
 import onChange from 'on-change';
 
-import { setupH3EventContextSession } from '../utils';
+import { setupH3EventContextSession } from '../../utils';
 
 export const clearH3EventContextSession = async (event: H3Event) => {
 	event.context.sessionChanged = event.context.sessionCleared = true;

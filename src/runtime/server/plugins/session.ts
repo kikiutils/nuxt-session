@@ -4,8 +4,8 @@ import { nanoid } from 'nanoid';
 import type { NitroApp } from 'nitropack';
 
 import { useRuntimeConfig } from '#imports';
-import { createSessionCipherFunctions, createSessionStorageFunctions, createSetCookieFunction, setupH3EventContextSession } from './utils';
-import type { PartialH3EventContextSession, RequiredModuleOptions } from '../types';
+import type { PartialH3EventContextSession, RequiredModuleOptions } from '../../../types';
+import { createSessionCipherFunctions, createSessionStorageFunctions, createSetCookieFunction, setupH3EventContextSession } from '../../utils';
 
 const logger = useLogger();
 
