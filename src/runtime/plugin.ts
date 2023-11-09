@@ -1,11 +1,10 @@
 import { useLogger } from '@nuxt/kit';
 import { deleteCookie, getCookie } from 'h3';
 import { nanoid } from 'nanoid';
-import onChange from 'on-change';
 import type { NitroApp } from 'nitropack';
 
 import { useRuntimeConfig } from '#imports';
-import { createSessionCipherFunctions, createSessionStorageFunctions, createSetCookieFunction } from './utils';
+import { createSessionCipherFunctions, createSessionStorageFunctions, createSetCookieFunction, setupH3EventContextSession } from './utils';
 import type { PartialH3EventContextSession, RequiredModuleOptions } from '../types';
 
 const logger = useLogger();
@@ -30,10 +29,7 @@ function setupUseCookieStorageHooks(moduleOptions: RequiredModuleOptions.UseCook
 			else session = decryptedSession;
 		}
 
-		event.context.session = onChange(session, () => {
-			event.context.sessionChanged = true;
-			onChange.unsubscribe(event.context.session);
-		});
+		setupH3EventContextSession(event, session);
 	});
 }
 
@@ -62,10 +58,7 @@ function setupUseUnstorageHooks(moduleOptions: RequiredModuleOptions.UseUnstorag
 			}
 		}
 
-		event.context.session = onChange(session, () => {
-			event.context.sessionChanged = true;
-			onChange.unsubscribe(event.context.session);
-		});
+		setupH3EventContextSession(event, session);
 	});
 }
 
