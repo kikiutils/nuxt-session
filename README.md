@@ -42,7 +42,7 @@ export default defineNuxtConfig({
   modules: [
     '@kikiutils/nuxt-session'
   ]
-  // With options:
+  // With options
   nuxtSession: {}
 });
 ```
@@ -55,11 +55,10 @@ You can use `event.context.session` to access the session in api routes or serve
 
 The [on-change](https://www.npmjs.com/package/on-change) package is used internally to detect if the session object has been changed, and if it hasn't, no data will be stored and no cookies will be set.
 
-**Currently, only requests with paths starting with `/api` load and set up sessions.**
-
-It is expected to be made adjustable in future releases.
+**Only requests with paths starting with `/api` load and set up sessions.**
 
 `server/api/test.ts`
+
 ```typescript
 export default defineEventHandler((event) => {
   event.context.session.account = 'account';
@@ -70,14 +69,18 @@ export default defineEventHandler((event) => {
 ```
 
 `server/middleware/auth.ts`
+
 ```typescript
 export default defineEventHandler((event) => {
+  if (!event.path.startsWith('/api')) return;
   const loginedUserId = event.context.session.userId;
   // Remaining operations...
 });
 ```
 
 You can use `clearH3EventContextSession` composable to clear session.
+
+`server/api/logout.ts`
 
 ```typescript
 export default defineEventHandler((event) => {
@@ -98,10 +101,11 @@ Attempting to store non-serializable objects results in lost method bindings and
 To pass a property in middleware or elsewhere, set the value directly in the event context.
 
 `server/middleware/auth.ts`
+
 ```typescript
 export default defineEventHandler((event) => {
-  const loginedUserId = event.context.session.userId;
-  const user = await UserModel.findOneById(loginedUserId);
+  if (!event.path.startsWith('/api')) return;
+  const user = await UserModel.findOneById(event.context.session.userId);
   if (user) event.context.session.user = user; // This is not the right operation!
   if (user) event.context.user = user; // It's the right thing to do.
   // Remaining operations...
@@ -113,19 +117,16 @@ export default defineEventHandler((event) => {
 To get full support for typescript, you need to add a new .d.ts file under your project folder:
 
 `types/session.d.ts`
-```typescript
-interface H3EventContextSession {
-  // Define your session attributes.
-}
 
-export declare module 'h3' {
-  interface H3EventContext {
-    session: Partial<H3EventContextSession>;
+```typescript
+declare module '@kikiutils/nuxt-session' {
+  interface H3EventContextSession {
+    // Define your session attributes.
   }
 }
-```
 
-Because it initializes with an empty object when no session is set, `context.session` type must be set to `Partial<H3EventContextSession>`.
+export {};
+```
 
 ## Storage Mode
 
@@ -212,6 +213,7 @@ Setting options according to driver type.
 This option is not available if the driver is set to memory.
 
 `nuxt.config.ts`
+
 ```typescript
 export default defineNuxtConfig({
   nuxtSession: {
@@ -234,6 +236,7 @@ Only available when driver is set to `cookie`.
 The secret must be set to 32 characters and ensures that it is not leaked anywhere.
 
 `nuxt.config.ts`
+
 ```typescript
 export default defineNuxtConfig({
   nuxtSession: {
@@ -245,7 +248,6 @@ export default defineNuxtConfig({
 });
 ```
 
-<!--
 ## Development
 
 ```bash
@@ -260,17 +262,7 @@ npm run dev
 
 # Build the playground
 npm run dev:build
-
-# Run ESLint
-npm run lint
-
-# Run Vitest
-npm run test
-npm run test:watch
-
-# Release new version
-npm run release
-``` -->
+```
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/@kikiutils/nuxt-session/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
