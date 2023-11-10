@@ -5,6 +5,7 @@ import type { NitroApp } from 'nitropack';
 
 import { useRuntimeConfig } from '#imports';
 import type { PartialH3EventContextSession, RequiredModuleOptions } from '../../../types';
+import { changedSymbol, clearedSymbol, storageKeySymbol } from '../../symbols';
 import { createSessionCipherFunctions, createSessionStorageFunctions, createSetCookieFunction, setupH3EventContextSession } from '../../utils';
 
 const logger = useLogger();
@@ -14,8 +15,8 @@ function setupUseCookieStorageHooks(moduleOptions: RequiredModuleOptions.UseCook
 	const { decryptSession, encryptSession } = createSessionCipherFunctions(moduleOptions.storage.secret);
 	const setCookie = createSetCookieFunction(moduleOptions);
 	nitroApp.hooks.hook('beforeResponse', (event) => {
-		if (!event.context.sessionChanged || !event.path.startsWith('/api')) return;
-		if (event.context.sessionCleared) return deleteCookie(event, moduleOptions.cookie.name);
+		if (!event.context.session[changedSymbol] || !event.path.startsWith('/api')) return;
+		if (event.context.session[clearedSymbol]) return deleteCookie(event, moduleOptions.cookie.name);
 		const encryptedSession = encryptSession(event.context.session);
 		if (encryptedSession !== undefined) setCookie(event, encryptedSession);
 	});
@@ -40,14 +41,14 @@ function setupUseUnstorageHooks(moduleOptions: RequiredModuleOptions.UseUnstorag
 	const { readSessionFromStorage, removeStorageSession, writeSessionToStorage } = createSessionStorageFunctions(moduleOptions);
 	const setCookie = createSetCookieFunction(moduleOptions);
 	nitroApp.hooks.hook('beforeResponse', async (event) => {
-		if (!event.context.sessionChanged || !event.path.startsWith('/api')) return;
-		if (event.context.sessionCleared) {
-			if (event.context.sessionStorageKey === undefined) return;
-			await removeStorageSession(event.context.sessionStorageKey);
+		if (!event.context.session[changedSymbol] || !event.path.startsWith('/api')) return;
+		if (event.context.session[clearedSymbol]) {
+			if (event.context.session[storageKeySymbol] === undefined) return;
+			await removeStorageSession(event.context.session[storageKeySymbol]);
 			return deleteCookie(event, moduleOptions.cookie.name);
 		}
 
-		const sessionStorageKey = event.context.sessionStorageKey || nanoid(moduleOptions.storage.keyLength);
+		const sessionStorageKey = event.context.session[storageKeySymbol] || nanoid(moduleOptions.storage.keyLength);
 		await writeSessionToStorage(sessionStorageKey, event.context.session);
 		setCookie(event, sessionStorageKey);
 	});
@@ -60,8 +61,8 @@ function setupUseUnstorageHooks(moduleOptions: RequiredModuleOptions.UseUnstorag
 			const storedSession = await readSessionFromStorage(sessionStorageKey);
 			if (storedSession === undefined) deleteCookie(event, moduleOptions.cookie.name);
 			else {
-				event.context.sessionStorageKey = sessionStorageKey;
 				session = storedSession;
+				session[storageKeySymbol] = sessionStorageKey;
 			}
 		}
 

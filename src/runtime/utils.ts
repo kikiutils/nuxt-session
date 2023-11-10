@@ -10,6 +10,7 @@ import redisDriver from 'unstorage/drivers/redis';
 import type { StorageValue } from 'unstorage';
 
 import type { PartialH3EventContextSession, RequiredModuleOptions } from '../types';
+import { changedSymbol } from './symbols';
 
 interface StorageSessionWithCreatedTime {
 	createdAt: number;
@@ -98,9 +99,13 @@ const getStorage = <T extends StorageValue>(moduleOptions: RequiredModuleOptions
 };
 
 export const setupH3EventContextSession = (event: H3Event, session: PartialH3EventContextSession, onChangeCallback?: (event: H3Event) => void) => {
-	event.context.session = onChange(session, () => {
-		event.context.sessionChanged = true;
-		onChangeCallback?.(event);
-		onChange.unsubscribe(event.context.session);
-	});
+	event.context.session = onChange(
+		session,
+		() => {
+			event.context.session[changedSymbol] = true;
+			onChangeCallback?.(event);
+			onChange.unsubscribe(event.context.session);
+		},
+		{ ignoreSymbols: true }
+	);
 };
