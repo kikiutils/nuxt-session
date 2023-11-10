@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.0.1
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v1.0.0...v1.0.1)
+
+### 🩹 Fixes
+
+- Correct erroneous add plugin paths ([a096b5b](https://github.com/kiki-kanri/nuxt-session/commit/a096b5b))
+
+### 🏡 Chore
+
+- Update repository format in package.json ([4cc636c](https://github.com/kiki-kanri/nuxt-session/commit/4cc636c))
+
+### ❤️ Contributors
+
+- kiki-kanri <a470666@gmail.com>
+
 ## v1.0.0
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v0.4.0...v1.0.0)
