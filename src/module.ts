@@ -1,4 +1,4 @@
-import { addServerImportsDir, addServerPlugin, createResolver, defineNuxtModule } from '@nuxt/kit';
+import { addServerImportsDir, addServerPlugin, createResolver, defineNuxtModule, useLogger } from '@nuxt/kit';
 import { defu } from 'defu';
 
 import type { ModuleOptions, RequiredModuleOptions } from './types';
@@ -26,9 +26,13 @@ export default defineNuxtModule<ModuleOptions>({
 		name: '@kikiutils/nuxt-session'
 	},
 	setup(options, nuxt) {
+		const logger = useLogger();
+		logger.info('Initializing Nuxt session...');
 		const resolver = createResolver(import.meta.url);
 		nuxt.options.runtimeConfig.nuxtSession = defu<RequiredModuleOptions, ModuleOptions[]>(nuxt.options.runtimeConfig.nuxtSession, options);
+		logger.info(`Nuxt session configured with '${nuxt.options.runtimeConfig.nuxtSession.storage.driver}' driver.`);
 		addServerImportsDir(resolver.resolve('./runtime/server/utils'));
 		addServerPlugin(resolver.resolve('./runtime/server/plugins/session'));
+		logger.success('Nuxt session initialization successful.');
 	}
 });

@@ -1,4 +1,3 @@
-import { useLogger } from '@nuxt/kit';
 import { deleteCookie, getCookie } from 'h3';
 import { nanoid } from 'nanoid';
 import type { NitroApp } from 'nitropack';
@@ -8,10 +7,7 @@ import type { PartialH3EventContextSession, RequiredModuleOptions } from '../../
 import { changedSymbol, clearedSymbol, storageKeySymbol } from '../../symbols';
 import { createSessionCipherFunctions, createSessionStorageFunctions, createSetCookieFunction, setupH3EventContextSession } from '../../utils';
 
-const logger = useLogger();
-
 function setupUseCookieStorageHooks(moduleOptions: RequiredModuleOptions.UseCookieStorage, nitroApp: NitroApp) {
-	logger.info(`Use cookie to store the session.`);
 	const { decryptSession, encryptSession } = createSessionCipherFunctions(moduleOptions.storage.secret);
 	const setCookie = createSetCookieFunction(moduleOptions);
 	nitroApp.hooks.hook('beforeResponse', (event) => {
@@ -36,7 +32,6 @@ function setupUseCookieStorageHooks(moduleOptions: RequiredModuleOptions.UseCook
 }
 
 function setupUseUnstorageHooks(moduleOptions: RequiredModuleOptions.UseUnstorage, nitroApp: NitroApp) {
-	logger.info(`Use unjs/unstorage with the driver "${moduleOptions.storage.driver}" to store the session.`);
 	if (moduleOptions.storage.keyLength < 12) throw new Error('The storage key length must be 12 or more!');
 	const { readSessionFromStorage, removeStorageSession, writeSessionToStorage } = createSessionStorageFunctions(moduleOptions);
 	const setCookie = createSetCookieFunction(moduleOptions);
@@ -71,9 +66,7 @@ function setupUseUnstorageHooks(moduleOptions: RequiredModuleOptions.UseUnstorag
 }
 
 export default (nitroApp: NitroApp) => {
-	logger.info('Initializing the Nuxt session...');
 	const runtimeConfig = useRuntimeConfig();
 	if (runtimeConfig.nuxtSession.storage.driver === 'cookie') setupUseCookieStorageHooks(runtimeConfig.nuxtSession as RequiredModuleOptions.UseCookieStorage, nitroApp);
 	else setupUseUnstorageHooks(runtimeConfig.nuxtSession as RequiredModuleOptions.UseUnstorage, nitroApp);
-	logger.success('Nuxt session initialized successfully.');
 };
