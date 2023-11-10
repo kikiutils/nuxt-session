@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Easy-to-use nuxt server-side session.",
   "license": "MIT",
-  "repository": "https://github.com/kiki-kanri/nuxt-session",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiki-kanri/nuxt-session.git"
+  },
   "type": "module",
   "main": "./dist/module.cjs",
   "files": [
