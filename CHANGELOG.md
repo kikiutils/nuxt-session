@@ -1,5 +1,25 @@
 # Changelog
 
+## v1.1.0
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v1.0.1...v1.1.0)
+
+### 🚀 Enhancements
+
+- Add enabled option and functionality ([afe5351](https://github.com/kiki-kanri/nuxt-session/commit/afe5351))
+
+### 🔥 Performance
+
+- Shorten property names in storage session for reduced size ([fc8ea4d](https://github.com/kiki-kanri/nuxt-session/commit/fc8ea4d))
+
+### 🏡 Chore
+
+- Update log messages for clarity ([a976195](https://github.com/kiki-kanri/nuxt-session/commit/a976195))
+
+### ❤️ Contributors
+
+- kiki-kanri <a470666@gmail.com>
+
 ## v1.0.1
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v1.0.0...v1.0.1)
