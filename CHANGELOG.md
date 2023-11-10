@@ -1,5 +1,28 @@
 # Changelog
 
+## v1.0.0
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v0.4.0...v1.0.0)
+
+### 💅 Refactors
+
+- Split and reorganize type definitions ([9bd831e](https://github.com/kiki-kanri/nuxt-session/commit/9bd831e))
+- Export H3EventContextSession type ([4f96852](https://github.com/kiki-kanri/nuxt-session/commit/4f96852))
+- Modify runtime directory structure ([7c3a5eb](https://github.com/kiki-kanri/nuxt-session/commit/7c3a5eb))
+- Use symbols to represent session properties ([12e91d6](https://github.com/kiki-kanri/nuxt-session/commit/12e91d6))
+
+### 📖 Documentation
+
+- Update readme ([de341bf](https://github.com/kiki-kanri/nuxt-session/commit/de341bf))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([564161b](https://github.com/kiki-kanri/nuxt-session/commit/564161b))
+
+### ❤️ Contributors
+
+- kiki-kanri <a470666@gmail.com>
+
 ## v0.4.0
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v0.3.0...v0.4.0)
