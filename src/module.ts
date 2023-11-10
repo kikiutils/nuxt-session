@@ -14,6 +14,7 @@ export default defineNuxtModule<ModuleOptions>({
 			sameSite: 'strict',
 			secure: true
 		},
+		enabled: true,
 		maxAge: 86400,
 		storage: {
 			driver: 'memory',
@@ -27,6 +28,7 @@ export default defineNuxtModule<ModuleOptions>({
 	},
 	setup(options, nuxt) {
 		const logger = useLogger();
+		if (!options.enabled) return logger.info('Nuxt session disabled.');
 		logger.info('Initializing Nuxt session...');
 		const resolver = createResolver(import.meta.url);
 		nuxt.options.runtimeConfig.nuxtSession = defu<RequiredModuleOptions, ModuleOptions[]>(nuxt.options.runtimeConfig.nuxtSession, options);

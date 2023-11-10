@@ -172,6 +172,11 @@ Refer to this [option](#storagedriver) to configure the storage mode.
 - **Type:** `boolean`
 - **Default:** `true`
 
+### enabled
+
+- **Type:** `boolean`
+- **Default:** `true`
+
 ### maxAge
 
 - **Type:** `number`

@@ -36,6 +36,11 @@ export interface ModuleOptions {
 	};
 
 	/**
+	 * @default true
+	 */
+	enabled?: boolean;
+
+	/**
 	 * @default 86400
 	 */
 	maxAge?: number;
