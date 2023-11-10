@@ -23,7 +23,7 @@ function setupUseCookieStorageHooks(moduleOptions: RequiredModuleOptions.UseCook
 		let session: PartialH3EventContextSession = {};
 		if (encryptedSession) {
 			const decryptedSession = decryptSession(encryptedSession);
-			if (decryptedSession === undefined) deleteCookie(event, moduleOptions.cookie.name);
+			if (!decryptedSession) deleteCookie(event, moduleOptions.cookie.name);
 			else session = decryptedSession;
 		}
 
@@ -38,7 +38,7 @@ function setupUseUnstorageHooks(moduleOptions: RequiredModuleOptions.UseUnstorag
 	nitroApp.hooks.hook('beforeResponse', async (event) => {
 		if (!event.context.session[changedSymbol] || !event.path.startsWith('/api')) return;
 		if (event.context.session[clearedSymbol]) {
-			if (event.context.session[storageKeySymbol] === undefined) return;
+			if (!event.context.session[storageKeySymbol]) return;
 			await removeStorageSession(event.context.session[storageKeySymbol]);
 			return deleteCookie(event, moduleOptions.cookie.name);
 		}
@@ -54,7 +54,7 @@ function setupUseUnstorageHooks(moduleOptions: RequiredModuleOptions.UseUnstorag
 		let session: PartialH3EventContextSession = {};
 		if (sessionStorageKey) {
 			const storedSession = await readSessionFromStorage(sessionStorageKey);
-			if (storedSession === undefined) deleteCookie(event, moduleOptions.cookie.name);
+			if (!storedSession) deleteCookie(event, moduleOptions.cookie.name);
 			else {
 				session = storedSession;
 				session[storageKeySymbol] = sessionStorageKey;

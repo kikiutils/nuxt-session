@@ -52,7 +52,7 @@ export const createSessionStorageFunctions = (moduleOptions: RequiredModuleOptio
 	const readSessionFromStorage = async (sessionStorageKey: string) => {
 		const itemKey = `${keyPrefix}_${sessionStorageKey}`;
 		const sessionWithCreatedTime = await storage.getItem(itemKey);
-		if (sessionWithCreatedTime === null) return;
+		if (!sessionWithCreatedTime) return;
 		if (sessionWithCreatedTime.c + maxAgeMs >= Date.now()) return sessionWithCreatedTime.d;
 		await storage.removeItem(itemKey);
 	};
