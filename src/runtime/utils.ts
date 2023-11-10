@@ -13,8 +13,8 @@ import type { PartialH3EventContextSession, RequiredModuleOptions } from '../typ
 import { changedSymbol } from './symbols';
 
 interface StorageSessionWithCreatedTime {
-	createdAt: number;
-	data: PartialH3EventContextSession;
+	c: number;
+	d: PartialH3EventContextSession;
 }
 
 export const createSessionCipherFunctions = (secretKey: string) => {
@@ -53,15 +53,15 @@ export const createSessionStorageFunctions = (moduleOptions: RequiredModuleOptio
 		const itemKey = `${keyPrefix}_${sessionStorageKey}`;
 		const sessionWithCreatedTime = await storage.getItem(itemKey);
 		if (sessionWithCreatedTime === null) return;
-		if (sessionWithCreatedTime.createdAt + maxAgeMs >= Date.now()) return sessionWithCreatedTime.data;
+		if (sessionWithCreatedTime.c + maxAgeMs >= Date.now()) return sessionWithCreatedTime.d;
 		await storage.removeItem(itemKey);
 	};
 
 	const removeStorageSession = async (sessionStorageKey: string) => storage.removeItem(`${keyPrefix}_${sessionStorageKey}`);
 	const writeSessionToStorage = async (sessionStorageKey: string, session: PartialH3EventContextSession) => {
 		await storage.setItem(`${keyPrefix}_${sessionStorageKey}`, {
-			createdAt: Date.now(),
-			data: session
+			c: Date.now(),
+			d: session
 		});
 	};
 
