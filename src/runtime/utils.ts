@@ -12,10 +12,7 @@ import type { StorageValue } from 'unstorage';
 import type { PartialH3EventContextSession, RequiredModuleOptions } from '../types';
 import { changedSymbol } from './symbols';
 
-interface StorageSessionWithCreatedTime {
-	c: number;
-	d: PartialH3EventContextSession;
-}
+type StorageSessionWithCreatedTime = [number, PartialH3EventContextSession];
 
 export const createSessionCipherFunctions = (secretKey: string) => {
 	const algorithm = 'aes-256-cbc';
@@ -50,16 +47,16 @@ export const createSessionStorageFunctions = (moduleOptions: RequiredModuleOptio
 	const readSessionFromStorage = async (sessionStorageKey: string) => {
 		const sessionWithCreatedTime = await storage.getItem(sessionStorageKey);
 		if (!sessionWithCreatedTime) return;
-		if (sessionWithCreatedTime.c + maxAgeMs >= Date.now()) return sessionWithCreatedTime.d;
+		if (sessionWithCreatedTime[0] + maxAgeMs >= Date.now()) return sessionWithCreatedTime[1];
 		await storage.removeItem(sessionStorageKey);
 	};
 
 	const removeStorageSession = async (sessionStorageKey: string) => storage.removeItem(sessionStorageKey);
 	const writeSessionToStorage = async (sessionStorageKey: string, session: PartialH3EventContextSession) => {
-		await storage.setItem(sessionStorageKey, {
-			c: Date.now(),
-			d: session
-		});
+		await storage.setItem(sessionStorageKey, [
+			Date.now(),
+			session
+		]);
 	};
 
 	return {
