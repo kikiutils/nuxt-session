@@ -9,8 +9,8 @@ import memoryDriver from 'unstorage/drivers/memory';
 import redisDriver from 'unstorage/drivers/redis';
 import type { StorageValue } from 'unstorage';
 
-import type { PartialH3EventContextSession, RequiredModuleOptions } from '../types';
 import { changedSymbol } from './symbols';
+import type { PartialH3EventContextSession, RequiredModuleOptions } from '../types';
 
 type StorageSessionWithCreatedTime = [number, PartialH3EventContextSession];
 
@@ -35,15 +35,12 @@ export const createSessionCipherFunctions = (secretKey: string) => {
 		} catch (error) {}
 	};
 
-	return {
-		decryptSession,
-		encryptSession
-	};
+	return { decryptSession, encryptSession };
 };
 
 export const createSessionStorageFunctions = (moduleOptions: RequiredModuleOptions.UseUnstorage) => {
 	const maxAgeMs = moduleOptions.maxAge * 1000;
-	const storage = prefixStorage(getStorage<StorageSessionWithCreatedTime>(moduleOptions), moduleOptions.storage.keyPrefix);
+	const storage = getStorage<StorageSessionWithCreatedTime>(moduleOptions);
 	const readSessionFromStorage = async (sessionStorageKey: string) => {
 		const sessionWithCreatedTime = await storage.getItem(sessionStorageKey);
 		if (!sessionWithCreatedTime) return;
@@ -52,29 +49,14 @@ export const createSessionStorageFunctions = (moduleOptions: RequiredModuleOptio
 	};
 
 	const removeStorageSession = async (sessionStorageKey: string) => storage.removeItem(sessionStorageKey);
-	const writeSessionToStorage = async (sessionStorageKey: string, session: PartialH3EventContextSession) => {
-		await storage.setItem(sessionStorageKey, [
-			Date.now(),
-			session
-		]);
-	};
-
-	return {
-		readSessionFromStorage,
-		removeStorageSession,
-		writeSessionToStorage
-	};
+	// prettier-ignore
+	const writeSessionToStorage = async (sessionStorageKey: string, session: PartialH3EventContextSession) => await storage.setItem(sessionStorageKey, [Date.now(), session]);
+	return { readSessionFromStorage, removeStorageSession, writeSessionToStorage };
 };
 
 export const createSetCookieFunction = (moduleOptions: RequiredModuleOptions) => {
-	return (event: H3Event, value: string) => {
-		const cookieOptions = {
-			...moduleOptions.cookie,
-			maxAge: moduleOptions.maxAge
-		};
-
-		return setCookie(event, moduleOptions.cookie.name, value, cookieOptions);
-	};
+	const cookieOptions = { ...moduleOptions.cookie, maxAge: moduleOptions.maxAge };
+	return (event: H3Event, value: string) => setCookie(event, moduleOptions.cookie.name, value, cookieOptions);
 };
 
 export const setupH3EventContextSession = (event: H3Event, session: PartialH3EventContextSession, onChangeCallback?: (event: H3Event) => void) => {
@@ -99,5 +81,5 @@ function getStorage<T extends StorageValue>({ storage }: RequiredModuleOptions.U
 	};
 
 	// @ts-ignore
-	return createStorage<T>({ driver: drivers[storage.driver]({ ...storage.options }) });
+	return prefixStorage(createStorage<T>({ driver: drivers[storage.driver]({ ...storage.options }) }), storage.keyPrefix);
 }
