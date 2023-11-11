@@ -103,7 +103,7 @@ To pass a property in middleware or elsewhere, set the value directly in the eve
 `server/middleware/auth.ts`
 
 ```typescript
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
   if (!event.path.startsWith('/api')) return;
   const user = await UserModel.findOneById(event.context.session.userId);
   if (user) event.context.session.user = user; // This is not the right operation!
@@ -194,6 +194,8 @@ It also sets the cookie expiration time.
 Choose how session content is stored.
 
 If set as a cookie, the [secret](#storagesecret) option must be set and none of the other options can be set.
+
+If set as an unstorage driver, please refer to the [document](https://unstorage.unjs.io/drivers/memory) for details on how to use it.
 
 ### storage.keyLength
 
