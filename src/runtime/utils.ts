@@ -83,21 +83,6 @@ export const createSetCookieFunction = (moduleOptions: RequiredModuleOptions) =>
 	};
 };
 
-const getStorage = <T extends StorageValue>(moduleOptions: RequiredModuleOptions.UseUnstorage) => {
-	if (moduleOptions.storage.driver === 'memory') return createStorage<T>({ driver: memoryDriver() });
-	const drivers = {
-		'fs-lite': fsLiteDriver,
-		'lru-cache': lruCacheDriver,
-		fs: fsDriver,
-		redis: redisDriver
-	} as const;
-
-	return createStorage<T>({
-		// @ts-ignore
-		driver: drivers[moduleOptions.storage.driver]({ ...moduleOptions.storage.options })
-	});
-};
-
 export const setupH3EventContextSession = (event: H3Event, session: PartialH3EventContextSession, onChangeCallback?: (event: H3Event) => void) => {
 	event.context.session = onChange(
 		session,
@@ -109,3 +94,16 @@ export const setupH3EventContextSession = (event: H3Event, session: PartialH3Eve
 		{ ignoreSymbols: true }
 	);
 };
+
+function getStorage<T extends StorageValue>({ storage }: RequiredModuleOptions.UseUnstorage) {
+	if (storage.driver === 'memory') return createStorage<T>({ driver: memoryDriver() });
+	const drivers = {
+		'fs-lite': fsLiteDriver,
+		'lru-cache': lruCacheDriver,
+		fs: fsDriver,
+		redis: redisDriver
+	};
+
+	// @ts-ignore
+	return createStorage<T>({ driver: drivers[storage.driver]({ ...storage.options }) });
+}
