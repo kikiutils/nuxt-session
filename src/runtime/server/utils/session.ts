@@ -3,8 +3,12 @@ import onChange from 'on-change';
 
 import { changedSymbol, clearedSymbol, storageKeySymbol } from '../../symbols';
 import { setupH3EventContextSession } from '../../utils';
+import type { PartialH3EventContextSession } from '../../../types';
 
-export const clearH3EventContextSession = async (event: H3Event) => {
+/**
+ * Clears the session.
+ */
+export const clearH3EventContextSession = (event: H3Event) => {
 	onChange.unsubscribe(event.context.session);
 	setupH3EventContextSession(
 		event,
@@ -15,4 +19,13 @@ export const clearH3EventContextSession = async (event: H3Event) => {
 		},
 		(event) => delete event.context.session[clearedSymbol]
 	);
+};
+
+/**
+ * Removes a key-value pair from the session and returns the value.
+ */
+export const popH3EventContextSession = <K extends keyof PartialH3EventContextSession>(event: H3Event, key: K) => {
+	const value = event.context.session[key];
+	delete event.context.session[key];
+	return value;
 };
