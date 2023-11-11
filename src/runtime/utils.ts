@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import { H3Event, setCookie } from 'h3';
 import onChange from 'on-change';
-import { createStorage } from 'unstorage';
+import { createStorage, prefixStorage } from 'unstorage';
 import fsDriver from 'unstorage/drivers/fs';
 import fsLiteDriver from 'unstorage/drivers/fs-lite';
 import lruCacheDriver from 'unstorage/drivers/lru-cache';
@@ -45,20 +45,18 @@ export const createSessionCipherFunctions = (secretKey: string) => {
 };
 
 export const createSessionStorageFunctions = (moduleOptions: RequiredModuleOptions.UseUnstorage) => {
-	const keyPrefix = moduleOptions.storage.keyPrefix;
 	const maxAgeMs = moduleOptions.maxAge * 1000;
-	const storage = getStorage<StorageSessionWithCreatedTime>(moduleOptions);
+	const storage = prefixStorage(getStorage<StorageSessionWithCreatedTime>(moduleOptions), moduleOptions.storage.keyPrefix);
 	const readSessionFromStorage = async (sessionStorageKey: string) => {
-		const itemKey = `${keyPrefix}_${sessionStorageKey}`;
-		const sessionWithCreatedTime = await storage.getItem(itemKey);
+		const sessionWithCreatedTime = await storage.getItem(sessionStorageKey);
 		if (!sessionWithCreatedTime) return;
 		if (sessionWithCreatedTime.c + maxAgeMs >= Date.now()) return sessionWithCreatedTime.d;
-		await storage.removeItem(itemKey);
+		await storage.removeItem(sessionStorageKey);
 	};
 
-	const removeStorageSession = async (sessionStorageKey: string) => storage.removeItem(`${keyPrefix}_${sessionStorageKey}`);
+	const removeStorageSession = async (sessionStorageKey: string) => storage.removeItem(sessionStorageKey);
 	const writeSessionToStorage = async (sessionStorageKey: string, session: PartialH3EventContextSession) => {
-		await storage.setItem(`${keyPrefix}_${sessionStorageKey}`, {
+		await storage.setItem(sessionStorageKey, {
 			c: Date.now(),
 			d: session
 		});
