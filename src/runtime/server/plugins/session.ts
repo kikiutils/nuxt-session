@@ -32,7 +32,6 @@ function setupUseCookieStorageHooks(moduleOptions: RequiredModuleOptions.UseCook
 }
 
 function setupUseUnstorageHooks(moduleOptions: RequiredModuleOptions.UseUnstorage, nitroApp: NitroApp) {
-	if (moduleOptions.storage.keyLength < 12) throw new Error('The storage key length must be 12 or more!');
 	const { readSessionFromStorage, removeStorageSession, writeSessionToStorage } = createSessionStorageFunctions(moduleOptions);
 	const setCookie = createSetCookieFunction(moduleOptions);
 	nitroApp.hooks.hook('beforeResponse', async (event) => {

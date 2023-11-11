@@ -18,7 +18,6 @@ interface StorageSessionWithCreatedTime {
 }
 
 export const createSessionCipherFunctions = (secretKey: string) => {
-	if (secretKey.length !== 32) throw new Error('The secret length must be 32!');
 	const algorithm = 'aes-256-cbc';
 	const key = Buffer.from(secretKey, 'utf-8');
 	const decryptSession = (encryptedSession: string) => {
