@@ -1,5 +1,34 @@
 # Changelog
 
+## v1.2.0
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v1.1.0...v1.2.0)
+
+### 🚀 Enhancements
+
+- Add retrieve and remove session key composable function ([9486446](https://github.com/kiki-kanri/nuxt-session/commit/9486446))
+
+### 🔥 Performance
+
+- Optimize session storage format ([542c5de](https://github.com/kiki-kanri/nuxt-session/commit/542c5de))
+
+### 💅 Refactors
+
+- Simplify truthiness check ([2ce869f](https://github.com/kiki-kanri/nuxt-session/commit/2ce869f))
+- Clean up the code ([bcea274](https://github.com/kiki-kanri/nuxt-session/commit/bcea274))
+- Move error checks to improve logic flow and accuracy ([369fbb9](https://github.com/kiki-kanri/nuxt-session/commit/369fbb9))
+- Use prefixStorage utils for storage prefix handling ([503052b](https://github.com/kiki-kanri/nuxt-session/commit/503052b))
+- Streamline function syntax and improve code formatting ([1149ab3](https://github.com/kiki-kanri/nuxt-session/commit/1149ab3))
+
+### 📖 Documentation
+
+- Update readme ([0d8be0e](https://github.com/kiki-kanri/nuxt-session/commit/0d8be0e))
+- Update doc and readme ([1348ba7](https://github.com/kiki-kanri/nuxt-session/commit/1348ba7))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.1.0
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v1.0.1...v1.1.0)
@@ -18,7 +47,7 @@
 
 ### ❤️ Contributors
 
-- kiki-kanri <a470666@gmail.com>
+- kiki-kanri
 
 ## v1.0.1
 
@@ -34,7 +63,7 @@
 
 ### ❤️ Contributors
 
-- kiki-kanri <a470666@gmail.com>
+- kiki-kanri
 
 ## v1.0.0
 
@@ -57,7 +86,7 @@
 
 ### ❤️ Contributors
 
-- kiki-kanri <a470666@gmail.com>
+- kiki-kanri
 
 ## v0.4.0
 
@@ -89,7 +118,7 @@
 
 ### ❤️ Contributors
 
-- kiki-kanri <a470666@gmail.com>
+- kiki-kanri
 
 ## v0.3.0
 
@@ -126,7 +155,7 @@
 
 ### ❤️ Contributors
 
-- kiki-kanri <a470666@gmail.com>
+- kiki-kanri
 
 ## v0.2.0
 
@@ -160,7 +189,7 @@
 
 ### ❤️ Contributors
 
-- kiki-kanri <a470666@gmail.com>
+- kiki-kanri
 
 ## v0.1.0
 
@@ -200,4 +229,4 @@
 
 ### ❤️ Contributors
 
-- kiki-kanri <a470666@gmail.com>
+- kiki-kanri
