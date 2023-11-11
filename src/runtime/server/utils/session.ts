@@ -7,6 +7,8 @@ import type { PartialH3EventContextSession } from '../../../types';
 
 /**
  * Clears the session.
+ *
+ * The cookie will be deleted if no new value is set after clearing.
  */
 export const clearH3EventContextSession = (event: H3Event) => {
 	onChange.unsubscribe(event.context.session);

@@ -78,18 +78,6 @@ export default defineEventHandler((event) => {
 });
 ```
 
-You can use `clearH3EventContextSession` composable to clear session.
-
-`server/api/logout.ts`
-
-```typescript
-export default defineEventHandler((event) => {
-  clearH3EventContextSession(event);
-  // Remaining operations...
-  return 'success';
-});
-```
-
 Memory storage is used by default, which means that all sessions will be lost when the server is restarted.
 
 To change to another storage method, please refer to the [storage mode](#storage-mode) below.
@@ -109,6 +97,38 @@ export default defineEventHandler(async (event) => {
   if (user) event.context.session.user = user; // This is not the right operation!
   if (user) event.context.user = user; // It's the right thing to do.
   // Remaining operations...
+});
+```
+
+## Server utils
+
+### clearH3EventContextSession
+
+Clears the session.
+
+The cookie will be deleted if no new value is set after clearing.
+
+`server/api/logout.ts`
+
+```typescript
+export default defineEventHandler((event) => {
+  clearH3EventContextSession(event);
+  // Remaining operations...
+  return 'success';
+});
+```
+
+### popH3EventContextSession
+
+Removes a key-value pair from the session and returns the value.
+
+`server/api/login.ts`
+
+```typescript
+export default defineEventHandler((event) => {
+  const code = popH3EventContextSession(event, 'code');
+  // Remaining operations...
+  return 'success';
 });
 ```
 
