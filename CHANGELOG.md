@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.2.1
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v1.2.0...v1.2.1)
+
+### 🩹 Fixes
+
+- Revise addImports method to address missing type ([f2f76c9](https://github.com/kiki-kanri/nuxt-session/commit/f2f76c9))
+
+### 📖 Documentation
+
+- Update doc and readme ([d497d56](https://github.com/kiki-kanri/nuxt-session/commit/d497d56))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.2.0
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v1.1.0...v1.2.0)
