@@ -175,17 +175,17 @@ Refer to this [option](#storagedriver) to configure the storage mode.
 ### cookie.name
 
 - **Type:** `string`
-- **Default:** `session`
+- **Default:** `'session'`
 
 ### cookie.path
 
 - **Type:** `string`
-- **Default:** `/`
+- **Default:** `'/'`
 
 ### cookie.sameSite
 
-- **Type:** `lax | none | strict`
-- **Default:** `strict`
+- **Type:** `'lax' | 'none' | 'strict'`
+- **Default:** `'strict'`
 
 ### cookie.secure
 
@@ -208,8 +208,8 @@ It also sets the cookie expiration time.
 
 ### storage.driver
 
-- **Type:** `cookie | fs | fs-lite | lru-cache | memory | redis`
-- **Default:** `memory`
+- **Type:** `'cookie' | 'fs' | 'fs-lite' | 'lru-cache' | 'memory' | 'redis'`
+- **Default:** `'memory'`
 
 Choose how session content is stored.
 
@@ -229,7 +229,7 @@ This value should not be set to less than 12, otherwise it is easy for an attack
 ### storage.keyPrefix
 
 - **Type:** `string`
-- **Default:** `session`
+- **Default:** `'session'`
 
 Set the prefix of the session storage key.
 

@@ -20,12 +20,12 @@ export interface ModuleOptions {
 		name?: string;
 
 		/**
-		 * @default /
+		 * @default '/'
 		 */
 		path?: string;
 
 		/**
-		 * @default strict
+		 * @default 'strict'
 		 */
 		sameSite?: 'lax' | 'none' | 'strict';
 
