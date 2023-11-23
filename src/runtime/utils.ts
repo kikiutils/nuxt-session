@@ -49,7 +49,6 @@ export const createSessionStorageFunctions = (moduleOptions: RequiredModuleOptio
 	};
 
 	const removeStorageSession = async (sessionStorageKey: string) => storage.removeItem(sessionStorageKey);
-	// prettier-ignore
 	const writeSessionToStorage = async (sessionStorageKey: string, session: PartialH3EventContextSession) => await storage.setItem(sessionStorageKey, [Date.now(), session]);
 	return { readSessionFromStorage, removeStorageSession, writeSessionToStorage };
 };
