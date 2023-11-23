@@ -1,5 +1,25 @@
 # Changelog
 
+## v1.2.2
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v1.2.1...v1.2.2)
+
+### 🩹 Fixes
+
+- Correct erroneous declare module names ([261e4be](https://github.com/kiki-kanri/nuxt-session/commit/261e4be))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([5fc18dd](https://github.com/kiki-kanri/nuxt-session/commit/5fc18dd))
+
+### 🎨 Styles
+
+- Remove 'prettier-ignore' comments ([ed510c6](https://github.com/kiki-kanri/nuxt-session/commit/ed510c6))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.2.1
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v1.2.0...v1.2.1)
