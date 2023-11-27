@@ -1,3 +1,4 @@
+import type { AESCipherEncodingOptions } from 'node-ciphers';
 import type { RequiredDeep } from 'type-fest';
 import type { FSStorageOptions } from 'unstorage/drivers/fs';
 import type { FSStorageOptions as FSLiteStorageOptions } from 'unstorage/drivers/fs-lite';
@@ -6,6 +7,16 @@ import type { RedisOptions } from 'unstorage/drivers/redis';
 
 type SessionStorageOptions = SessionStorageOptions.Cookie | ((SessionStorageOptions.Fs | SessionStorageOptions.FsLite | SessionStorageOptions.LruCache | SessionStorageOptions.Memory | SessionStorageOptions.Redis) & UseUnstorageSessionStorageOptions);
 export type RequiredModuleOptions = RequiredDeep<ModuleOptions>;
+
+export interface CookieStorageOptions {
+	encodingOptions?: AESCipherEncodingOptions;
+
+	/**
+	 * @default 'ctr'
+	 */
+	encryptionMode?: 'cbc' | 'cfb' | 'cfb1' | 'cfb8' | 'ctr' | 'ofb';
+	key: string;
+}
 
 export interface ModuleOptions {
 	cookie?: {
@@ -87,11 +98,7 @@ export namespace RequiredModuleOptions {
 namespace SessionStorageOptions {
 	interface Cookie {
 		driver: 'cookie';
-
-		/**
-		 * Must be a 32-character long secure password for encryption and decryption.
-		 */
-		secret: string;
+		options: CookieStorageOptions;
 	}
 
 	interface Fs {

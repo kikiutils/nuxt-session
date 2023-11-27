@@ -1,5 +1,5 @@
-import crypto from 'crypto';
 import { H3Event, setCookie } from 'h3';
+import { AESCipher } from 'node-ciphers';
 import onChange from 'on-change';
 import { createStorage, prefixStorage } from 'unstorage';
 import fsDriver from 'unstorage/drivers/fs';
@@ -10,29 +10,32 @@ import redisDriver from 'unstorage/drivers/redis';
 import type { StorageValue } from 'unstorage';
 
 import { changedSymbol } from './symbols';
-import type { PartialH3EventContextSession, RequiredModuleOptions } from '../types';
+import type { CookieStorageOptions, PartialH3EventContextSession, RequiredModuleOptions } from '../types';
 
 type StorageSessionWithCreatedTime = [number, PartialH3EventContextSession];
 
-export const createSessionCipherFunctions = (secretKey: string) => {
-	const algorithm = 'aes-256-cbc';
-	const key = Buffer.from(secretKey, 'utf-8');
+export const createSessionCipherFunctions = (options: CookieStorageOptions) => {
+	const aesModeToCipherClassMap = {
+		cbc: AESCipher.CBC,
+		cfb: AESCipher.CFB,
+		cfb1: AESCipher.CFB1,
+		cfb8: AESCipher.CFB8,
+		ctr: AESCipher.CTR,
+		ofb: AESCipher.OFB
+	};
+
+	const cipher = new aesModeToCipherClassMap[options.encryptionMode || 'ctr'](options.key, options.encodingOptions);
 	const decryptSession = (encryptedSession: string) => {
 		const textParts = encryptedSession.split(':');
 		if (textParts.length === 1) return;
-		try {
-			const iv = Buffer.from(textParts.shift()!, 'hex');
-			const decipher = crypto.createDecipheriv(algorithm, key, iv);
-			return JSON.parse(`${decipher.update(textParts.join(':'), 'hex', 'utf8')}${decipher.final('utf8')}`) as PartialH3EventContextSession;
-		} catch (error) {}
+		const iv = textParts.pop()!;
+		return cipher.decryptToJSON<PartialH3EventContextSession>(textParts.join(':'), iv);
 	};
 
 	const encryptSession = (session: PartialH3EventContextSession) => {
-		const iv = crypto.randomBytes(16);
-		const cipher = crypto.createCipheriv(algorithm, key, iv);
-		try {
-			return `${iv.toString('hex')}:${cipher.update(JSON.stringify(session), 'utf8', 'hex')}${cipher.final('hex')}`;
-		} catch (error) {}
+		const encryptResult = cipher.encryptJSON(session);
+		if (!encryptResult) return;
+		return `${encryptResult.data}:${encryptResult.iv}`;
 	};
 
 	return { decryptSession, encryptSession };

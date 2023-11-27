@@ -8,7 +8,7 @@ import { createSessionCipherFunctions, createSessionStorageFunctions, createSetC
 import type { PartialH3EventContextSession, RequiredModuleOptions } from '../../../types';
 
 function setupUseCookieStorageHooks(moduleOptions: RequiredModuleOptions.UseCookieStorage, nitroApp: NitroApp) {
-	const { decryptSession, encryptSession } = createSessionCipherFunctions(moduleOptions.storage.secret);
+	const { decryptSession, encryptSession } = createSessionCipherFunctions(moduleOptions.storage.options);
 	const setCookie = createSetCookieFunction(moduleOptions);
 	nitroApp.hooks.hook('beforeResponse', (event) => {
 		if (!event.context.session[changedSymbol] || !event.path.startsWith('/api')) return;

@@ -5,6 +5,15 @@ import type { ModuleOptions, RequiredModuleOptions } from './types';
 
 export type { H3EventContextSession } from './types/session';
 
+const availableAESModes = [
+	'cbc',
+	'cfb',
+	'cfb1',
+	'cfb8',
+	'ctr',
+	'ofb'
+] as const;
+
 export default defineNuxtModule<ModuleOptions>({
 	defaults: {
 		cookie: {
@@ -33,7 +42,9 @@ export default defineNuxtModule<ModuleOptions>({
 		const moduleOptions = defu<RequiredModuleOptions, ModuleOptions[]>(nuxt.options.runtimeConfig.nuxtSession, options);
 		logger.info(`Nuxt session configured with '${moduleOptions.storage.driver}' driver.`);
 		if (moduleOptions.storage.driver === 'cookie') {
-			if (moduleOptions.storage.secret.length !== 32) throw new Error('The secret length must be 32!');
+			if (!availableAESModes.includes(moduleOptions.storage.options.encryptionMode)) throw new Error(`Invalid encryption mode: ${moduleOptions.storage.options.encryptionMode}`);
+			//prettier-ignore
+			if (![16, 24, 32].includes(moduleOptions.storage.options.key.length)) throw new Error(`Invalid cookie secret key length`);
 		} else if (moduleOptions.storage.keyLength < 12) throw new Error('The storage key length must be 12 or more!');
 		nuxt.options.runtimeConfig.nuxtSession = moduleOptions;
 		const resolver = createResolver(import.meta.url);
