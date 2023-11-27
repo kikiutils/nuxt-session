@@ -14,7 +14,7 @@ function setupUseCookieStorageHooks(moduleOptions: RequiredModuleOptions.UseCook
 		if (!event.context.session[changedSymbol] || !event.path.startsWith('/api')) return;
 		if (event.context.session[clearedSymbol]) return deleteCookie(event, moduleOptions.cookie.name);
 		const encryptedSession = encryptSession(event.context.session);
-		if (encryptedSession !== undefined) setCookie(event, encryptedSession);
+		if (encryptedSession) setCookie(event, encryptedSession);
 	});
 
 	nitroApp.hooks.hook('request', (event) => {
