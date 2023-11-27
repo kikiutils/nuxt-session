@@ -1,7 +1,7 @@
 import { addServerImports, addServerPlugin, createResolver, defineNuxtModule, useLogger } from '@nuxt/kit';
 import { defu } from 'defu';
 
-import type { ModuleOptions, RequiredModuleOptions } from './types';
+import type { CookieStorageOptions, ModuleOptions, RequiredModuleOptions } from './types';
 
 export type { H3EventContextSession } from './types/session';
 
@@ -13,6 +13,15 @@ const availableAESModes = [
 	'ctr',
 	'ofb'
 ] as const;
+
+const defaultCookieStorageOptions: Omit<CookieStorageOptions, 'key'> = {
+	encodingOptions: {
+		decryptInput: 'base64',
+		encryptOutput: 'base64',
+		iv: 'base64'
+	},
+	encryptionMode: 'ctr'
+};
 
 export default defineNuxtModule<ModuleOptions>({
 	defaults: {
@@ -42,8 +51,9 @@ export default defineNuxtModule<ModuleOptions>({
 		const moduleOptions = defu<RequiredModuleOptions, ModuleOptions[]>(nuxt.options.runtimeConfig.nuxtSession, options);
 		logger.info(`Nuxt session configured with '${moduleOptions.storage.driver}' driver.`);
 		if (moduleOptions.storage.driver === 'cookie') {
+			moduleOptions.storage.options = defu(moduleOptions.storage.options, defaultCookieStorageOptions);
 			if (!availableAESModes.includes(moduleOptions.storage.options.encryptionMode)) throw new Error(`Invalid encryption mode: ${moduleOptions.storage.options.encryptionMode}`);
-			//prettier-ignore
+			// prettier-ignore
 			if (![16, 24, 32].includes(moduleOptions.storage.options.key.length)) throw new Error(`Invalid cookie secret key length`);
 		} else if (moduleOptions.storage.keyLength < 12) throw new Error('The storage key length must be 12 or more!');
 		nuxt.options.runtimeConfig.nuxtSession = moduleOptions;
