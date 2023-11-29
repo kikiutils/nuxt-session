@@ -55,7 +55,7 @@ export default defineNuxtModule<ModuleOptions>({
 			if (!availableAESModes.includes(moduleOptions.storage.options.encryptionMode)) throw new Error(`Invalid encryption mode: ${moduleOptions.storage.options.encryptionMode}`);
 			// prettier-ignore
 			if (![16, 24, 32].includes(Buffer.from(moduleOptions.storage.options.key, moduleOptions.storage.options.encodingOptions.key).byteLength)) throw new Error(`Invalid cookie secret key length`);
-		} else if (moduleOptions.storage.keyLength < 12) throw new Error('The storage key length must be 12 or more');
+		} else if (moduleOptions.storage.keyLength < 16) throw new Error('The storage key length must be 16 or more');
 		nuxt.options.runtimeConfig.nuxtSession = moduleOptions;
 		const resolver = createResolver(import.meta.url);
 		const sessionUtilsFilePath = resolver.resolve('./runtime/server/utils/session');
