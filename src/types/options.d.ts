@@ -9,12 +9,39 @@ type SessionStorageOptions = SessionStorageOptions.Cookie | ((SessionStorageOpti
 export type RequiredModuleOptions = RequiredDeep<ModuleOptions>;
 
 export interface CookieStorageOptions {
+	/**
+	 * Codec settings for encoding strings into buffers or decoding buffers into strings.
+	 *
+	 * Adjusting this setting arbitrarily may result in failure to encrypt or decrypt data properly.
+	 *
+	 * @default
+	 *
+	 * {
+	 *   decryptInput: 'base64',
+	 *   decryptOutput: 'utf8',
+	 *   encryptInput: 'utf8',
+	 *   encryptOutput: 'base64',
+	 *   key: 'utf8',
+	 *   iv: 'base64'
+	 * }
+	 */
 	encodingOptions?: AESCipherEncodingOptions;
 
 	/**
+	 * AES encryption mode used.
+	 *
+	 * ECB mode is not allowed due to security reasons.
+	 *
 	 * @default 'ctr'
 	 */
 	encryptionMode?: 'cbc' | 'cfb' | 'cfb1' | 'cfb8' | 'ctr' | 'ofb';
+
+	/**
+	 * The key used for encryption, length must be one of 16, 24 or 32.
+	 *
+	 * The length of the key is determined by the `encodingOptions.key` setting
+	 * (default value is utf8) through the Buffer.from converted byteLength.
+	 */
 	key: string;
 }
 
@@ -52,6 +79,10 @@ export interface ModuleOptions {
 	enabled?: boolean;
 
 	/**
+	 * Session expiration time in seconds.
+	 *
+	 * It also sets the cookie expiration time.
+	 *
 	 * @default 86400
 	 */
 	maxAge?: number;
@@ -76,7 +107,7 @@ interface UseUnstorageSessionStorageOptions {
 	/**
 	 * Length of the storage key (excluding the prefix).
 	 *
-	 * Should not be set to less than 12.
+	 * Should not be set to less than 16.
 	 *
 	 * @default 16
 	 */
