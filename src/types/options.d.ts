@@ -41,6 +41,8 @@ export interface CookieStorageOptions {
 	 *
 	 * The length of the key is determined by the `encodingOptions.key` setting
 	 * (default value is utf8) through the Buffer.from converted byteLength.
+	 *
+	 * The key should not be leaked to the front-end or elsewhere, it is recommended to use the env setting.
 	 */
 	key: string;
 }
@@ -105,16 +107,16 @@ export interface UseUnstorageModuleOptions extends ModuleOptions {
 
 interface UseUnstorageSessionStorageOptions {
 	/**
-	 * Length of the storage key (excluding the prefix).
+	 * Set the length of the session storage key (excluding the prefix).
 	 *
-	 * Should not be set to less than 16.
+	 * This value should not be set to less than 16, otherwise it is easy for an attacker to brute-force it.
 	 *
 	 * @default 16
 	 */
 	keyLength?: number;
 
 	/**
-	 * Prefix of the storage key.
+	 * Set the prefix of the session storage key.
 	 *
 	 * @default 'session'
 	 */

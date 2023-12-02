@@ -16,8 +16,7 @@ Easy-to-use nuxt server-side session.
 - ✔️ Continuous session between requests using cookies
 - ✔️ Available in server-side middleware
 - ✔️ Auto save session
-- ✔️ Using cookies to store session data
-- ✔️ Using [unjs/unstorage](https://github.com/unjs/unstorage) drivers to store session data
+- ✔️ Using cookies or [unjs/unstorage](https://github.com/unjs/unstorage) drivers to store session data
 - ✔️ Typescript support
 
 ## Quick Setup
@@ -159,7 +158,7 @@ The package provides two methods for storing session data:
   - memory
   - redis
 
-If you select cookie, the data will be encrypted and stored in the cookie and you will need to set the [encryption key](#storagesecret).
+If you select cookie, the data will be encrypted and stored in the cookie and you will need to set the [encryption key](#storageoptionskey).
 
 If you select the unstorage driver, the data will be stored as key-value pairs but not encrypted.
 
@@ -213,9 +212,9 @@ It also sets the cookie expiration time.
 
 Choose how session content is stored.
 
-If set as a cookie, the [secret](#storagesecret) option must be set and none of the other options can be set.
+If set as a cookie, the [encryption key](#storageoptionskey) option must be set.
 
-If set as an unstorage driver, please refer to the [document](https://unstorage.unjs.io/drivers/memory) for details on how to use it.
+If set as an unstorage driver, please refer to the [document](https://unstorage.unjs.io/drivers/memory) for details on how to use it and configuration [storage.options](#storageoptions).
 
 ### storage.keyLength
 
@@ -224,7 +223,9 @@ If set as an unstorage driver, please refer to the [document](https://unstorage.
 
 Set the length of the session storage key (excluding the prefix).
 
-This value should not be set to less than 12, otherwise it is easy for an attacker to brute-force it.
+This value should not be set to less than 16, otherwise it is easy for an attacker to brute-force it.
+
+Can only be set if `storage.driver` is not set as a cookie.
 
 ### storage.keyPrefix
 
@@ -233,43 +234,53 @@ This value should not be set to less than 12, otherwise it is easy for an attack
 
 Set the prefix of the session storage key.
 
+Can only be set if `storage.driver` is not set as a cookie.
+
 ### storage.options
 
 Setting options according to driver type.
 
-This option is not available if the driver is set to memory.
+This options is not available if the driver is set to memory.
 
-`nuxt.config.ts`
+If `storage.driver` is set to cookie, please refer to cookie related [options](#cookie-storage-options).
 
-```typescript
-export default defineNuxtConfig({
-  nuxtSession: {
-    storage: {
-      driver: 'redis',
-      options: {
-        url: process.env.REDIS_URL
-      }
-    }
-  }
-});
-```
+### Cookie storage options
 
-### storage.secret
+Can only be set when `storage.driver` is set to cookie.
+
+#### storage.options.encodingOptions
+
+Codec settings for encoding strings into buffers or decoding buffers into strings.
+
+Adjusting this setting arbitrarily may result in failure to encrypt or decrypt data properly.
+
+#### storage.options.encryptionMode
+
+- **Type:** `'cbc' | 'cfb' | 'cfb1' | 'cfb8' | 'ctr' | 'ofb'`
+- **Default:** `'ctr'`
+
+AES encryption mode used.
+
+ECB mode is not allowed due to security reasons.
+
+#### storage.options.key
 
 - **Type:** `string`
 
-Only available when driver is set to `cookie`.
+The key used for encryption, length must be one of 16, 24 or 32.
 
-The secret must be set to 32 characters and ensures that it is not leaked anywhere.
+The length of the key is determined by the `storage.options.encodingOptions.key` setting (default value is utf8) through the Buffer.from converted byteLength.
 
-`nuxt.config.ts`
+The key should not be leaked to the front-end or elsewhere, it is recommended to use the env setting.
 
 ```typescript
 export default defineNuxtConfig({
   nuxtSession: {
     storage: {
       driver: 'cookie',
-      secret: process.env.SESSION_COOKIE_SECRET
+      options: {
+        key: process.env.SESSION_COOKIE_KEY
+      }
     }
   }
 });
@@ -290,6 +301,11 @@ npm run dev
 # Build the playground
 npm run dev:build
 ```
+
+## TODO
+
+- Auto-refresh expiration time
+- Compare request ip
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/@kikiutils/nuxt-session/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
