@@ -1,5 +1,47 @@
 # Changelog
 
+## v2.0.0
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v1.2.2...v2.0.0)
+
+### 🚀 Enhancements
+
+- Add node-ciphers package and update files config in package.json ([7c3b31b](https://github.com/kiki-kanri/nuxt-session/commit/7c3b31b))
+- ⚠️ Add new cookie encryption options and refactor encryption methods ([b98feb6](https://github.com/kiki-kanri/nuxt-session/commit/b98feb6))
+
+### 🩹 Fixes
+
+- Resolve missing default values in cookie storage options ([f3f0755](https://github.com/kiki-kanri/nuxt-session/commit/f3f0755))
+- Correct key length check to account for encoding ([0d9cecb](https://github.com/kiki-kanri/nuxt-session/commit/0d9cecb))
+
+### 💅 Refactors
+
+- Remove redundant !== checks ([6a8cf7e](https://github.com/kiki-kanri/nuxt-session/commit/6a8cf7e))
+- ⚠️  Increase minimum storage keyLength to 16 ([0b74b42](https://github.com/kiki-kanri/nuxt-session/commit/0b74b42))
+
+### 📖 Documentation
+
+- Add example comments to server utils functions ([2dc83d4](https://github.com/kiki-kanri/nuxt-session/commit/2dc83d4))
+- Update interface attributes docs ([274086e](https://github.com/kiki-kanri/nuxt-session/commit/274086e))
+- Update README and doc ([20477ae](https://github.com/kiki-kanri/nuxt-session/commit/20477ae))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([8a232b4](https://github.com/kiki-kanri/nuxt-session/commit/8a232b4))
+
+### 🎨 Styles
+
+- Remove punctuation from error messages ([b7e5a87](https://github.com/kiki-kanri/nuxt-session/commit/b7e5a87))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️ Add new cookie encryption options and refactor encryption methods ([b98feb6](https://github.com/kiki-kanri/nuxt-session/commit/b98feb6))
+- ⚠️ Increase minimum storage keyLength to 16 ([0b74b42](https://github.com/kiki-kanri/nuxt-session/commit/0b74b42))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.2.2
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v1.2.1...v1.2.2)
