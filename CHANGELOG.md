@@ -1,5 +1,21 @@
 # Changelog
 
+## v2.0.1
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v2.0.0...v2.0.1)
+
+### 💅 Refactors
+
+- Change method of adding server utils ([b81668d](https://github.com/kiki-kanri/nuxt-session/commit/b81668d))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([2a61ba1](https://github.com/kiki-kanri/nuxt-session/commit/2a61ba1))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.0.0
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v1.2.2...v2.0.0)
