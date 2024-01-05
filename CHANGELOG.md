@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.0.2
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v2.0.1...v2.0.2)
+
+### 💅 Refactors
+
+- Change method of adding server utils ([4f843a4](https://github.com/kiki-kanri/nuxt-session/commit/4f843a4))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([027b066](https://github.com/kiki-kanri/nuxt-session/commit/027b066))
+- Add author field to package.json ([2d9ba45](https://github.com/kiki-kanri/nuxt-session/commit/2d9ba45))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.0.1
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v2.0.0...v2.0.1)
