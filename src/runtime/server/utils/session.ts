@@ -1,9 +1,9 @@
 import { H3Event } from 'h3';
 import onChange from 'on-change';
 
+import type { PartialH3EventContextSession } from '../../../types';
 import { changedSymbol, clearedSymbol, storageKeySymbol } from '../../symbols';
 import { setupH3EventContextSession } from '../../utils';
-import type { PartialH3EventContextSession } from '../../../types';
 
 /**
  * Clears the session.

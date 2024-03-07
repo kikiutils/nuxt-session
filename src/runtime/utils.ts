@@ -2,12 +2,12 @@ import { H3Event, setCookie } from 'h3';
 import { AESCipher } from 'node-ciphers';
 import onChange from 'on-change';
 import { createStorage, prefixStorage } from 'unstorage';
+import type { StorageValue } from 'unstorage';
 import fsDriver from 'unstorage/drivers/fs';
 import fsLiteDriver from 'unstorage/drivers/fs-lite';
 import lruCacheDriver from 'unstorage/drivers/lru-cache';
 import memoryDriver from 'unstorage/drivers/memory';
 import redisDriver from 'unstorage/drivers/redis';
-import type { StorageValue } from 'unstorage';
 
 import { changedSymbol } from './symbols';
 import type { CookieStorageOptions, PartialH3EventContextSession, RequiredModuleOptions } from '../types';
