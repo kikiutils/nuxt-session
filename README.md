@@ -304,8 +304,9 @@ npm run dev:build
 
 ## TODO
 
-- Auto-refresh expiration time
-- Compare request ip
+- [ ] Auto-refresh expiration time
+- [ ] Compare request ip
+- [ ] Create nitro-session package and migrate core functions and logic into it
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/@kikiutils/nuxt-session/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
