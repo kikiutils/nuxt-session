@@ -24,6 +24,7 @@
   "dependencies": {
     "@nuxt/kit": "^3.10.3",
     "defu": "^6.1.4",
+    "ioredis": "^5.3.2",
     "nanoid": "^5.0.6",
     "node-ciphers": "^0.8.1",
     "on-change": "^5.0.1",
