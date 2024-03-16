@@ -1,5 +1,31 @@
 # Changelog
 
+## v2.0.3
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v2.0.2...v2.0.3)
+
+### 🚀 Enhancements
+
+- Add ioredis dependency ([7654fc7](https://github.com/kiki-kanri/nuxt-session/commit/7654fc7))
+
+### 📖 Documentation
+
+- Update README ([b0b323c](https://github.com/kiki-kanri/nuxt-session/commit/b0b323c))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([a086b14](https://github.com/kiki-kanri/nuxt-session/commit/a086b14))
+- Modify some commands in package.json scripts ([2698b7f](https://github.com/kiki-kanri/nuxt-session/commit/2698b7f))
+- Upgrade dependencies ([7476dcc](https://github.com/kiki-kanri/nuxt-session/commit/7476dcc))
+
+### 🎨 Styles
+
+- Change location of some import statements ([6bd757b](https://github.com/kiki-kanri/nuxt-session/commit/6bd757b))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.0.2
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v2.0.1...v2.0.2)
