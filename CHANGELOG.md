@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.0.4
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v2.0.3...v2.0.4)
+
+### 💅 Refactors
+
+- Change method of adding server utils ([f95459a](https://github.com/kiki-kanri/nuxt-session/commit/f95459a))
+
+### 🏡 Chore
+
+- Upgrade dependencies and remove @nuxt/eslint-config dependency ([113ba2c](https://github.com/kiki-kanri/nuxt-session/commit/113ba2c))
+- Modify export types statements ([e8d8c0b](https://github.com/kiki-kanri/nuxt-session/commit/e8d8c0b))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.0.3
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v2.0.2...v2.0.3)
