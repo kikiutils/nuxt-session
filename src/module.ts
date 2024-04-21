@@ -1,4 +1,4 @@
-import { addServerImports, addServerPlugin, createResolver, defineNuxtModule, useLogger } from '@nuxt/kit';
+import { addServerImportsDir, addServerPlugin, createResolver, defineNuxtModule, useLogger } from '@nuxt/kit';
 import { defu } from 'defu';
 
 import type { CookieStorageOptions, ModuleOptions, RequiredModuleOptions } from './types';
@@ -58,12 +58,7 @@ export default defineNuxtModule<ModuleOptions>({
 		} else if (moduleOptions.storage.keyLength < 16) throw new Error('The storage key length must be 16 or more');
 		nuxt.options.runtimeConfig.nuxtSession = moduleOptions;
 		const resolver = createResolver(import.meta.url);
-		const sessionUtilsFilePath = resolver.resolve('./runtime/server/utils/session');
-		addServerImports([
-			{ from: sessionUtilsFilePath, name: 'clearH3EventContextSession' },
-			{ from: sessionUtilsFilePath, name: 'popH3EventContextSession' }
-		]);
-
+		addServerImportsDir(resolver.resolve('./runtime/server/utils'));
 		addServerPlugin(resolver.resolve('./runtime/server/plugins/session'));
 		logger.success('Nuxt session initialization successful.');
 	}
