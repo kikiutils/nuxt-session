@@ -1,5 +1,39 @@
 # Changelog
 
+## v3.0.0
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v2.0.4...v3.0.0)
+
+### 🚀 Enhancements
+
+- Add plugin and utils file for runtime ([1bb833b](https://github.com/kiki-kanri/nuxt-session/commit/1bb833b))
+- Add type definitions ([f08e95c](https://github.com/kiki-kanri/nuxt-session/commit/f08e95c))
+- Add main module file ([c1df894](https://github.com/kiki-kanri/nuxt-session/commit/c1df894))
+
+### 🔄 Migration to v3
+
+The following are the changes related to the configure options.
+
+- The original `nuxtSession.storage` options is now changed to `nuxtSession.storage.data`.
+- The original `nuxtSession.storage.driver` option type `cookie` is now changed to `cookie/header`.
+- The original `nuxtSession.storage.keyLength` setting is now changed to `nuxtSession.storage.data.key.length`.
+- The original `nuxtSession.storage.keyPrefix` setting is now changed to `nuxtSession.storage.data.key.prefix`.
+
+### 📖 Documentation
+
+- Update README ([0fc510c](https://github.com/kiki-kanri/nuxt-session/commit/0fc510c))
+
+### 🏡 Chore
+
+- Remove code files and non-development dependencies ([5371a4b](https://github.com/kiki-kanri/nuxt-session/commit/5371a4b))
+- Update .gitignore ([4b36190](https://github.com/kiki-kanri/nuxt-session/commit/4b36190))
+- Add `@kikiutils/nitro-session` dependency ([2c99639](https://github.com/kiki-kanri/nuxt-session/commit/2c99639))
+- Set Nuxt compatibility requirement to >=3.9.0 ([bb69d36](https://github.com/kiki-kanri/nuxt-session/commit/bb69d36))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.0.4
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v2.0.3...v2.0.4)
