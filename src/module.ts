@@ -6,7 +6,11 @@ export type {} from './types/h3';
 export type { H3EventContextSession } from './types/session';
 
 export default defineNuxtModule<PluginOptions>({
-	meta: { configKey: 'nuxtSession', name: '@kikiutils/nuxt-session' },
+	meta: {
+		configKey: 'nuxtSession',
+		name: '@kikiutils/nuxt-session',
+		compatibility: { nuxt: '>=3.9.0' }
+	},
 	async setup(options, nuxt) {
 		const logger = useLogger();
 		const initializationResult = await initialization('Nuxt', options);
