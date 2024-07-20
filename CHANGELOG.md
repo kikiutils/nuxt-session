@@ -1,5 +1,27 @@
 # Changelog
 
+## v3.1.0
+
+> [!NOTE]
+> Due to the core `@kikiutils/nitro-session` being updated from 1.0.1 to 1.1.1, the version number has been bumped to 3.1.0.
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v3.0.0...v3.1.0)
+
+### 📖 Documentation
+
+- Update README ([0f3238e](https://github.com/kiki-kanri/nuxt-session/commit/0f3238e))
+
+### 🏡 Chore
+
+- Update .gitignore ([57f63d4](https://github.com/kiki-kanri/nuxt-session/commit/57f63d4))
+- Upgrade dependencies ([f97f7f3](https://github.com/kiki-kanri/nuxt-session/commit/f97f7f3))
+- Add engines field to package.json with Node.js >=18 ([aa00b31](https://github.com/kiki-kanri/nuxt-session/commit/aa00b31))
+- Update keywords in package.json ([bc26c59](https://github.com/kiki-kanri/nuxt-session/commit/bc26c59))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v3.0.0
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v2.0.4...v3.0.0)
