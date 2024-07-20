@@ -35,6 +35,9 @@
     "nuxt",
     "session"
   ],
+  "engines": {
+    "node": ">=18"
+  },
   "exports": {
     ".": {
       "types": "./dist/types.d.ts",
