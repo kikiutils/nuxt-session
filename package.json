@@ -33,6 +33,7 @@
   },
   "keywords": [
     "nuxt",
+    "nuxt-session",
     "session"
   ],
   "engines": {
