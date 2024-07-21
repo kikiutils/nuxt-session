@@ -1,5 +1,21 @@
 # Changelog
 
+## v3.1.1
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v3.1.0...v3.1.1)
+
+### 📖 Documentation
+
+- Update README ([ed6963c](https://github.com/kiki-kanri/nuxt-session/commit/ed6963c))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([af4f570](https://github.com/kiki-kanri/nuxt-session/commit/af4f570))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v3.1.0
 
 > [!NOTE]
