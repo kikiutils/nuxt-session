@@ -33,7 +33,7 @@
   },
   "keywords": [
     "nuxt",
-    "nuxt-session",
+    "nuxt session",
     "session"
   ],
   "engines": {
@@ -41,9 +41,9 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/types.d.ts",
       "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs"
+      "require": "./dist/module.cjs",
+      "types": "./dist/types.d.ts"
     }
   },
   "prettier": "@kikiutils/prettierrc"
