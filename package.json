@@ -22,7 +22,7 @@
   },
   "types": "./dist/types.d.ts",
   "dependencies": {
-    "@kikiutils/nitro-session": "^1.1.1",
+    "@kikiutils/nitro-session": "^1.2.0",
     "@nuxt/kit": "^3.12.4"
   },
   "devDependencies": {
