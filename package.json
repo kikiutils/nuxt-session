@@ -8,8 +8,8 @@
     "type": "git",
     "url": "git+https://github.com/kiki-kanri/nuxt-session.git"
   },
-  "type": "module",
   "main": "./dist/module.cjs",
+  "module": "./dist/module.mjs",
   "files": [
     "./dist"
   ],
