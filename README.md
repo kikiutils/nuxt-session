@@ -41,7 +41,7 @@ export default defineNuxtConfig({
 });
 ```
 
-3. Create a `session.d.ts` file in the server folder under the project directory and and add the following code:
+3. Create a `session.d.ts` file in the `server` folder under the project directory and and add the following code:
 
 ```typescript
 declare module '@kikiutils/nuxt-session' {
@@ -76,6 +76,8 @@ Except for the configuration method mentioned above, all other options remain th
 Please refer to this [link](https://github.com/kiki-kanri/nitro-session?tab=readme-ov-file#usage) for related usage.
 
 > [!IMPORTANT]
+> This package is intended for use in the `server` folder of Nuxt. For more information about this folder, please see this [link](https://nuxt.com/docs/guide/directory-structure/server).
+>
 > Only requests with paths starting with `/api` will handle sessions.
 
 ## Server Runtime Utils
