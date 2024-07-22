@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@kikiutils/nitro-session':
-        specifier: ^1.2.1
-        version: 1.2.1(ioredis@5.4.1)
+        specifier: ^1.2.5
+        version: 1.2.5(ioredis@5.4.1)
       '@nuxt/kit':
         specifier: ^3.12.4
         version: 3.12.4(magicast@0.3.4)(rollup@4.19.0)
@@ -786,8 +786,8 @@ packages:
     resolution: {integrity: sha512-G/M/tIiMrTAxEWRfLfQJMmGNX28IxBg4PBz8XqQhqUHLFI6TL2htpIB1iQCj144V5ee/JaKyT9/WZ0MGZWfA7A==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
 
-  '@eslint/config-array@0.17.0':
-    resolution: {integrity: sha512-A68TBu6/1mHHuc5YJL0U0VVeGNiklLAL6rRmhTCP2B5XjWLMnrX+HkO+IAXyHvks5cyyY1jjK5ITPQ1HGS2EVA==}
+  '@eslint/config-array@0.17.1':
+    resolution: {integrity: sha512-BlYOpej8AQ8Ev9xVqroV7a02JK3SkBAaN9GfMMH9W6Ch8FlQlkjGw4Ir7+FgYwfirivAf4t+GtzuAxqfukmISA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/eslintrc@3.1.0':
@@ -842,8 +842,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@kikiutils/nitro-session@1.2.1':
-    resolution: {integrity: sha512-tJztfYOGfOqD0zKC2xymHKAXWtJO2zUT6SzhAFJLJJZbs+U9y1bTM2oGSsRk9r79B9Y35AqluitVCj1b+4Rztw==}
+  '@kikiutils/nitro-session@1.2.5':
+    resolution: {integrity: sha512-F0Ggz+aYgjdeytgOw4xvVoNOynIjjwbQFRFfbHFSOCx2V9ykAXT1SWG8LXG3RHuv3hy3ESCPyFO2NpJl87J5FQ==}
     engines: {node: '>=18'}
 
   '@kikiutils/prettierrc@1.3.2':
@@ -3388,8 +3388,8 @@ packages:
     resolution: {integrity: sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g==}
     engines: {node: '>=14.16'}
 
-  type-fest@4.22.1:
-    resolution: {integrity: sha512-9tHNEa0Ov81YOopiVkcCJVz5TM6AEQ+CHHjFIktqPnE3NV0AHIkx+gh9tiCl58m/66wWxkOC9eltpa75J4lQPA==}
+  type-fest@4.23.0:
+    resolution: {integrity: sha512-ZiBujro2ohr5+Z/hZWHESLz3g08BBdrdLMieYFULJO+tWc437sn8kQsWLJoZErY8alNhxre9K4p3GURAG11n+w==}
     engines: {node: '>=16'}
 
   type-level-regexp@0.1.17:
@@ -3445,8 +3445,8 @@ packages:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
 
-  unplugin-vue-router@0.10.0:
-    resolution: {integrity: sha512-t9cwRvNONcrh7CZLUYrd4kGOH4xZRhsHeT+exaAuYFn7z87pkTHiHh3wBnGerfKGs22SnmJIIjcKyEa62CO+4w==}
+  unplugin-vue-router@0.10.1:
+    resolution: {integrity: sha512-ATqvUsHBz1cdzeUfbYaOOCJ3t6Ax+iGCmPVXS2uJJJATqjnhHXz10DcPoDyrrD0ni2dzT8zrn4jXRczD/H1fhg==}
     peerDependencies:
       vue-router: ^4.4.0
     peerDependenciesMeta:
@@ -3539,8 +3539,8 @@ packages:
     peerDependencies:
       vite: ^2.6.0 || ^3.0.0 || ^4.0.0 || ^5.0.0-0
 
-  vite-node@2.0.3:
-    resolution: {integrity: sha512-14jzwMx7XTcMB+9BhGQyoEAmSl0eOr3nrnn+Z12WNERtOvLN+d2scbRUvyni05rT3997Bg+rZb47NyP4IQPKXg==}
+  vite-node@2.0.4:
+    resolution: {integrity: sha512-ZpJVkxcakYtig5iakNeL7N3trufe3M6vGuzYAr4GsbCTwobDeyPJpE4cjDhhPluv8OvQCFzu2LWp6GkoKRITXA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
@@ -3764,19 +3764,19 @@ snapshots:
     dependencies:
       browser-or-node: 2.1.1
       run-time-assertions: 1.5.2
-      type-fest: 4.22.1
+      type-fest: 4.23.0
 
   '@augment-vir/common@28.2.4':
     dependencies:
       browser-or-node: 3.0.0
       run-time-assertions: 1.5.2
-      type-fest: 4.22.1
+      type-fest: 4.23.0
 
   '@augment-vir/common@29.3.0':
     dependencies:
       browser-or-node: 3.0.0
       run-time-assertions: 1.5.2
-      type-fest: 4.22.1
+      type-fest: 4.23.0
 
   '@babel/code-frame@7.24.7':
     dependencies:
@@ -4301,7 +4301,7 @@ snapshots:
   '@eslint-community/regexpp@4.11.0':
     optional: true
 
-  '@eslint/config-array@0.17.0':
+  '@eslint/config-array@0.17.1':
     dependencies:
       '@eslint/object-schema': 2.1.4
       debug: 4.3.5
@@ -4372,7 +4372,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@kikiutils/nitro-session@1.2.1(ioredis@5.4.1)':
+  '@kikiutils/nitro-session@1.2.5(ioredis@5.4.1)':
     dependencies:
       consola: 3.2.3
       lodash-es: 4.17.21
@@ -4639,7 +4639,7 @@ snapshots:
       unenv: 1.10.0
       unplugin: 1.11.0
       vite: 5.3.4(@types/node@20.14.11)(terser@5.31.3)
-      vite-node: 2.0.3(@types/node@20.14.11)(terser@5.31.3)
+      vite-node: 2.0.4(@types/node@20.14.11)(terser@5.31.3)
       vite-plugin-checker: 0.7.2(eslint@9.7.0)(optionator@0.9.4)(typescript@5.5.3)(vite@5.3.4(@types/node@20.14.11)(terser@5.31.3))
       vue: 3.4.33(typescript@5.5.3)
       vue-bundle-renderer: 2.1.0
@@ -5777,7 +5777,7 @@ snapshots:
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@9.7.0)
       '@eslint-community/regexpp': 4.11.0
-      '@eslint/config-array': 0.17.0
+      '@eslint/config-array': 0.17.1
       '@eslint/eslintrc': 3.1.0
       '@eslint/js': 9.7.0
       '@humanwhocodes/module-importer': 1.0.1
@@ -6589,7 +6589,7 @@ snapshots:
 
   node-ciphers@0.8.1:
     dependencies:
-      type-fest: 4.22.1
+      type-fest: 4.23.0
 
   node-fetch-native@1.6.4: {}
 
@@ -6690,7 +6690,7 @@ snapshots:
       unenv: 1.10.0
       unimport: 3.9.0(rollup@4.19.0)
       unplugin: 1.11.0
-      unplugin-vue-router: 0.10.0(rollup@4.19.0)(vue-router@4.4.0(vue@3.4.33(typescript@5.5.3)))(vue@3.4.33(typescript@5.5.3))
+      unplugin-vue-router: 0.10.1(rollup@4.19.0)(vue-router@4.4.0(vue@3.4.33(typescript@5.5.3)))(vue@3.4.33(typescript@5.5.3))
       unstorage: 1.10.2(ioredis@5.4.1)
       untyped: 1.4.2
       vue: 3.4.33(typescript@5.5.3)
@@ -7217,7 +7217,7 @@ snapshots:
     dependencies:
       '@augment-vir/common': 29.3.0
       expect-type: 0.15.0
-      type-fest: 4.22.1
+      type-fest: 4.23.0
 
   safe-buffer@5.1.2: {}
 
@@ -7469,7 +7469,7 @@ snapshots:
 
   type-fest@3.13.1: {}
 
-  type-fest@4.22.1: {}
+  type-fest@4.23.0: {}
 
   type-level-regexp@0.1.17: {}
 
@@ -7564,7 +7564,7 @@ snapshots:
 
   universalify@2.0.1: {}
 
-  unplugin-vue-router@0.10.0(rollup@4.19.0)(vue-router@4.4.0(vue@3.4.33(typescript@5.5.3)))(vue@3.4.33(typescript@5.5.3)):
+  unplugin-vue-router@0.10.1(rollup@4.19.0)(vue-router@4.4.0(vue@3.4.33(typescript@5.5.3)))(vue@3.4.33(typescript@5.5.3)):
     dependencies:
       '@babel/types': 7.24.9
       '@rollup/pluginutils': 5.1.0(rollup@4.19.0)
@@ -7659,7 +7659,7 @@ snapshots:
     dependencies:
       vite: 5.3.4(@types/node@20.14.11)(terser@5.31.3)
 
-  vite-node@2.0.3(@types/node@20.14.11)(terser@5.31.3):
+  vite-node@2.0.4(@types/node@20.14.11)(terser@5.31.3):
     dependencies:
       cac: 6.7.14
       debug: 4.3.5
