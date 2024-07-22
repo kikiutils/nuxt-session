@@ -1,5 +1,20 @@
 # Changelog
 
+## v3.1.2
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v3.1.1...v3.1.2)
+
+### 🏡 Chore
+
+- Update keywords list in package.json ([bfe68a6](https://github.com/kiki-kanri/nuxt-session/commit/bfe68a6))
+- Remove type field and add module field in package.json ([c5bebcb](https://github.com/kiki-kanri/nuxt-session/commit/c5bebcb))
+- Update dependencies and README ([62fe065](https://github.com/kiki-kanri/nuxt-session/commit/62fe065))
+- Upgrade dependencies ([d72d60b](https://github.com/kiki-kanri/nuxt-session/commit/d72d60b))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v3.1.1
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v3.1.0...v3.1.1)
