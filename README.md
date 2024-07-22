@@ -11,12 +11,12 @@ Easy-to-use nuxt server-side session.
 
 ## Features
 
-- ✔️ Continuous session between requests using a cookie or header
-- ✔️ Available in server-side middleware
-- ✔️ Auto-save session
-- ✔️ Store session data using a cookie, header, or [unjs/unstorage](https://github.com/unjs/unstorage) drivers
-- ✔️ Optional strict IP validation to ensure session security
-- ✔️ TypeScript support
+- 🔄 Continuous session between requests using a cookie or header
+- 🌐 Available in server-side middleware
+- 💾 Auto-save session
+- 📦 Store session data using a cookie, header, or [unjs/unstorage](https://github.com/unjs/unstorage) drivers
+- 🔒 Optional strict IP validation to ensure session security
+- 🛠️ TypeScript support
 
 ## Environment Requirements
 
