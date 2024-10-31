@@ -8,17 +8,16 @@
     "type": "git",
     "url": "git+https://github.com/kiki-kanri/nuxt-session.git"
   },
-  "main": "./dist/module.cjs",
-  "module": "./dist/module.mjs",
   "files": [
     "./dist"
   ],
   "scripts": {
+    "build": "nuxt-module-build build",
     "bumplog": "changelogen --bump",
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
-    "prepack": "nuxt-module-build build"
+    "prepack": "pnpm run build"
   },
   "types": "./dist/types.d.ts",
   "dependencies": {
@@ -37,7 +36,7 @@
     "session"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=18.12.1"
   },
   "exports": {
     ".": {
