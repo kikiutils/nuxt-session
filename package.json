@@ -17,7 +17,8 @@
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
-    "prepack": "pnpm run build"
+    "prepack": "pnpm run build",
+    "release": "pnpm run build && changelogen --push --release && npm publish"
   },
   "types": "./dist/types.d.ts",
   "dependencies": {
