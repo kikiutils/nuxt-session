@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@kikiutils/changelogen": "^0.7.0",
-    "@kikiutils/prettierrc": "^1.3.2",
+    "@kikiutils/eslint-config": "^0.4.1",
     "@nuxt/module-builder": "^0.8.4",
     "nuxt": "^3.14.1592"
   },
@@ -45,6 +45,5 @@
       "require": "./dist/module.cjs",
       "types": "./dist/types.d.ts"
     }
-  },
-  "prettier": "@kikiutils/prettierrc"
+  }
 }
