@@ -2,15 +2,31 @@
   "name": "@kikiutils/nuxt-session",
   "version": "3.1.2",
   "description": "Easy-to-use nuxt server-side session.",
-  "license": "MIT",
   "author": "kiki-kanri",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kiki-kanri/nuxt-session.git"
   },
+  "keywords": [
+    "nuxt",
+    "nuxt session",
+    "session"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "types": "./dist/types.d.ts",
   "files": [
     "./dist"
   ],
+  "engines": {
+    "node": ">=18.12.1"
+  },
   "scripts": {
     "build": "nuxt-module-build build",
     "bumplog": "changelogen --bump",
@@ -22,7 +38,6 @@
     "prepack": "pnpm run build",
     "release": "pnpm run lint && pnpm run build && changelogen --push --release && npm publish"
   },
-  "types": "./dist/types.d.ts",
   "dependencies": {
     "@kikiutils/nitro-session": "^2.0.1",
     "@nuxt/kit": "^3.14.1592"
@@ -32,20 +47,5 @@
     "@kikiutils/eslint-config": "^0.4.1",
     "@nuxt/module-builder": "^0.8.4",
     "nuxt": "^3.14.1592"
-  },
-  "keywords": [
-    "nuxt",
-    "nuxt session",
-    "session"
-  ],
-  "engines": {
-    "node": ">=18.12.1"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs",
-      "types": "./dist/types.d.ts"
-    }
   }
 }

@@ -1,4 +1,4 @@
-import { defineEventHandler, clearH3EventContextSession } from '#imports';
+import { clearH3EventContextSession, defineEventHandler } from '#imports';
 
 export default defineEventHandler((event) => {
 	clearH3EventContextSession(event);
