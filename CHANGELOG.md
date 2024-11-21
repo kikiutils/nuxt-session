@@ -1,5 +1,29 @@
 # Changelog
 
+## v3.1.3
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v3.1.2...v3.1.3)
+
+### 🏡 Chore
+
+- Upgrade dependencies ([8813a88](https://github.com/kiki-kanri/nuxt-session/commit/8813a88))
+- Upgrade dependencies ([3c36ef9](https://github.com/kiki-kanri/nuxt-session/commit/3c36ef9))
+- Update package.json ([4ed773d](https://github.com/kiki-kanri/nuxt-session/commit/4ed773d))
+- Switch changelog generation package ([8202ab4](https://github.com/kiki-kanri/nuxt-session/commit/8202ab4))
+- Add release script to package.json ([4db9f4a](https://github.com/kiki-kanri/nuxt-session/commit/4db9f4a))
+- Upgrade dependencies ([aeab46d](https://github.com/kiki-kanri/nuxt-session/commit/aeab46d))
+- Replace Prettier with ESLint, add related files, and update VSCode settings ([e95d755](https://github.com/kiki-kanri/nuxt-session/commit/e95d755))
+- Modify scripts in package.json ([a835e58](https://github.com/kiki-kanri/nuxt-session/commit/a835e58))
+
+### 🎨 Styles
+
+- Reorder badge URLs in README ([3137a3b](https://github.com/kiki-kanri/nuxt-session/commit/3137a3b))
+- Format and lint all files ([aba09e9](https://github.com/kiki-kanri/nuxt-session/commit/aba09e9))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v3.1.2
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v3.1.1...v3.1.2)
