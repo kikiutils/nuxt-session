@@ -37,7 +37,7 @@ You can also use yarn, npm, or bun to add the dependency.
 
 ```typescript
 export default defineNuxtConfig({
-  modules: ['@kikiutils/nuxt-session']
+    modules: ['@kikiutils/nuxt-session']
 });
 ```
 
@@ -45,9 +45,9 @@ export default defineNuxtConfig({
 
 ```typescript
 declare module '@kikiutils/nuxt-session' {
-  interface H3EventContextSession {
-    // Define the session data here.
-  }
+    interface H3EventContextSession {
+        // Define the session data here.
+    }
 }
 
 export {};
@@ -61,9 +61,9 @@ Configure using `nuxtSession` in `nuxt.config.ts`.
 
 ```typescript
 export default defineNuxtConfig({
-  nuxtSession: {
-    // Configure options here
-  }
+    nuxtSession: {
+        // Configure options here
+    }
 });
 ```
 
