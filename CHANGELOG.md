@@ -1,5 +1,22 @@
 # Changelog
 
+## v3.1.4
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v3.1.3...v3.1.4)
+
+### 🏡 Chore
+
+- Modify eslint config ([02e7f99](https://github.com/kiki-kanri/nuxt-session/commit/02e7f99))
+- Upgrade dependencies ([7a02367](https://github.com/kiki-kanri/nuxt-session/commit/7a02367))
+
+### 🎨 Styles
+
+- Format and lint all files ([af35ce6](https://github.com/kiki-kanri/nuxt-session/commit/af35ce6))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v3.1.3
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v3.1.2...v3.1.3)
