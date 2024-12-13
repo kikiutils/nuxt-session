@@ -36,9 +36,7 @@ You can also use yarn, npm, or bun to add the dependency.
 2. Add this module to the `modules` field in `nuxt.config.ts`:
 
 ```typescript
-export default defineNuxtConfig({
-    modules: ['@kikiutils/nuxt-session']
-});
+export default defineNuxtConfig({ modules: ['@kikiutils/nuxt-session'] });
 ```
 
 3. Create a `session.d.ts` file in the `server` folder under the project directory and and add the following code:
@@ -60,11 +58,7 @@ That's it! You're ready to use sessions in your Nuxt app. Check out the [configu
 Configure using `nuxtSession` in `nuxt.config.ts`.
 
 ```typescript
-export default defineNuxtConfig({
-    nuxtSession: {
-        // Configure options here
-    }
-});
+export default defineNuxtConfig({ nuxtSession: {} });
 ```
 
 This package uses [`@kikiutils/nitro-session`](https://github.com/kiki-kanri/nitro-session) as its core. For related configuration instructions, please refer to this [link](https://github.com/kiki-kanri/nitro-session?tab=readme-ov-file#configuration).

@@ -1,6 +1,12 @@
 import { initialization } from '@kikiutils/nitro-session';
 import type { PluginOptions } from '@kikiutils/nitro-session/types/options';
-import { addServerImportsDir, addServerPlugin, createResolver, defineNuxtModule, useLogger } from '@nuxt/kit';
+import {
+    addServerImportsDir,
+    addServerPlugin,
+    createResolver,
+    defineNuxtModule,
+    useLogger,
+} from '@nuxt/kit';
 
 export type {} from './types/h3';
 export type { H3EventContextSession } from './types/session';
