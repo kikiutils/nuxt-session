@@ -1,5 +1,23 @@
 # Changelog
 
+## v3.1.5
+
+[compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v3.1.4...v3.1.5)
+
+### 🏡 Chore
+
+- Upgrade dependencies ([4f796f6](https://github.com/kiki-kanri/nuxt-session/commit/4f796f6))
+- Upgrade dependencies and add `pnpm.onlyBuiltDependencies` setting to package.json ([4d8ae52](https://github.com/kiki-kanri/nuxt-session/commit/4d8ae52))
+- Temporarily restrict TypeScript version to 5.6 ([f53fbfa](https://github.com/kiki-kanri/nuxt-session/commit/f53fbfa))
+
+### 🎨 Styles
+
+- Format and lint all files ([d1669d1](https://github.com/kiki-kanri/nuxt-session/commit/d1669d1))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v3.1.4
 
 [compare changes](https://github.com/kiki-kanri/nuxt-session/compare/v3.1.3...v3.1.4)
