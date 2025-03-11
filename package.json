@@ -39,15 +39,15 @@
     "release": "pnpm run lint && pnpm run build && changelogen --push --release && npm publish"
   },
   "dependencies": {
-    "@kikiutils/nitro-session": "^2.0.5",
-    "@nuxt/kit": "^3.15.4"
+    "@kikiutils/nitro-session": "^2.0.6",
+    "@nuxt/kit": "^3.16.0"
   },
   "devDependencies": {
-    "@kikiutils/changelogen": "^0.7.1",
-    "@kikiutils/eslint-config": "^0.8.2",
+    "@kikiutils/changelogen": "^0.8.0",
+    "@kikiutils/eslint-config": "^0.8.3",
     "@nuxt/module-builder": "^0.8.4",
-    "nuxt": "^3.15.4",
-    "typescript": "~5.6.3"
+    "nuxt": "^3.16.0",
+    "typescript": "^5.8.2"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
