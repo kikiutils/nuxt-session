@@ -1,6 +1,6 @@
 {
   "name": "@kikiutils/nuxt-session",
-  "version": "3.1.5",
+  "version": "3.1.6",
   "description": "Easy-to-use nuxt server-side session.",
   "author": "kiki-kanri",
   "license": "MIT",

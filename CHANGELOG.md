@@ -1,5 +1,19 @@
 # Changelog
 
+## v3.1.6
+
+[compare changes](https://github.com/kikiutils/nuxt-session/compare/v3.1.5...v3.1.6)
+
+### 🏡 Chore
+
+- Upgrade dependencies ([78afab5](https://github.com/kikiutils/nuxt-session/commit/78afab5))
+- Update repository URL ([e050e41](https://github.com/kikiutils/nuxt-session/commit/e050e41))
+- Set `hideAuthorEmail` arg in changelogen command ([8436e5e](https://github.com/kikiutils/nuxt-session/commit/8436e5e))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v3.1.5
 
 [compare changes](https://github.com/kikiutils/nuxt-session/compare/v3.1.4...v3.1.5)
