@@ -61,13 +61,13 @@ Configure using `nuxtSession` in `nuxt.config.ts`.
 export default defineNuxtConfig({ nuxtSession: {} });
 ```
 
-This package uses [`@kikiutils/nitro-session`](https://github.com/kiki-kanri/nitro-session) as its core. For related configuration instructions, please refer to this [link](https://github.com/kiki-kanri/nitro-session?tab=readme-ov-file#configuration).
+This package uses [`@kikiutils/nitro-session`](https://github.com/kikiutils/nitro-session) as its core. For related configuration instructions, please refer to this [link](https://github.com/kikiutils/nitro-session?tab=readme-ov-file#configuration).
 
 Except for the configuration method mentioned above, all other options remain the same.
 
 ## Usage
 
-Please refer to this [link](https://github.com/kiki-kanri/nitro-session?tab=readme-ov-file#usage) for related usage.
+Please refer to this [link](https://github.com/kikiutils/nitro-session?tab=readme-ov-file#usage) for related usage.
 
 > [!IMPORTANT]
 > This package is intended for use in the `server` folder of Nuxt. For more information about this folder, please see this [link](https://nuxt.com/docs/guide/directory-structure/server).
@@ -76,7 +76,7 @@ Please refer to this [link](https://github.com/kiki-kanri/nitro-session?tab=read
 
 ## Server Runtime Utils
 
-Please refer to this [link](https://github.com/kiki-kanri/nitro-session?tab=readme-ov-file#runtime-utils) for related server runtime utils.
+Please refer to this [link](https://github.com/kikiutils/nitro-session?tab=readme-ov-file#runtime-utils) for related server runtime utils.
 
 ## License
 
@@ -89,7 +89,7 @@ Please refer to this [link](https://github.com/kiki-kanri/nitro-session?tab=read
 [npm-downloads-href]: https://npmjs.com/package/@kikiutils/nuxt-session
 [npm-downloads-src]: https://img.shields.io/npm/dm/@kikiutils/nuxt-session.svg?style=flat&colorA=18181B&colorB=28CF8D
 
-[license-href]: https://github.com/kiki-kanri/nuxt-session/blob/main/LICENSE
+[license-href]: https://github.com/kikiutils/nuxt-session/blob/main/LICENSE
 [license-src]: https://img.shields.io/npm/l/@kikiutils/nuxt-session.svg?style=flat&colorA=18181B&colorB=28CF8D
 
 [nuxt-href]: https://nuxt.com

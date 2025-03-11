@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kiki-kanri/nuxt-session.git"
+    "url": "git+https://github.com/kikiutils/nuxt-session.git"
   },
   "keywords": [
     "nuxt",
