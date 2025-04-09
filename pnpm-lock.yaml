@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@kikiutils/nitro-session':
-        specifier: ^3.0.0
-        version: 3.0.0(db0@0.3.1)(ioredis@5.6.0)
+        specifier: ^3.0.1
+        version: 3.0.1(db0@0.3.1)(ioredis@5.6.0)
       '@nuxt/kit':
         specifier: ^3.16.2
         version: 3.16.2(magicast@0.3.5)
@@ -19,8 +19,8 @@ importers:
         specifier: ^0.8.0
         version: 0.8.0(magicast@0.3.5)
       '@kikiutils/eslint-config':
-        specifier: ^0.12.0
-        version: 0.12.0(@vue/compiler-sfc@3.5.13)(jiti@2.4.2)(tailwindcss@3.4.17)(typescript@5.8.3)(vue-eslint-parser@10.1.3(eslint@9.24.0(jiti@2.4.2)))
+        specifier: ^0.12.2
+        version: 0.12.2(@vue/compiler-sfc@3.5.13)(jiti@2.4.2)(tailwindcss@3.4.17)(typescript@5.8.3)(vue-eslint-parser@10.1.3(eslint@9.24.0(jiti@2.4.2)))
       '@nuxt/module-builder':
         specifier: ^1.0.1
         version: 1.0.1(@nuxt/cli@3.24.1(magicast@0.3.5))(esbuild@0.25.2)(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3))
@@ -513,8 +513,8 @@ packages:
     resolution: {integrity: sha512-9LigtBNCIQILEVHrARvF0esmisEb7qHSFJzY+j3OgRiDm4PAXES8FMYPSBxI2eoQjoswQ4lUE75GbVerejN76Q==}
     hasBin: true
 
-  '@kikiutils/eslint-config@0.12.0':
-    resolution: {integrity: sha512-CcMNKqUtAHsffLFfrw6MFPSWVyjuiZKtsGXD0kW08CMevQLOmlYoF2gXYcjVsYOEdFxaMCjiNR9DPyFyzqgKwQ==}
+  '@kikiutils/eslint-config@0.12.2':
+    resolution: {integrity: sha512-SV7zjj7aEtRTRtEwn04fMfxi0DBcpxv0v0CjHZ/D0DaEOF49cWYp5l0zjLwIx/PlIWYtbwhAR3rbm5aGRU3MQQ==}
     engines: {node: '>=18.12.1'}
 
   '@kikiutils/eslint-plugin-tailwindcss@3.19.0':
@@ -530,8 +530,8 @@ packages:
       eslint: ^8.57.0 || ^9.0.0
       vue-eslint-parser: ^10.0.0
 
-  '@kikiutils/nitro-session@3.0.0':
-    resolution: {integrity: sha512-dfnggVrrKejtBoTx/3EZIssSkXrGQ+rT+4UsjaWwZxK3fP5tsOH4Y7+rt8dyubnEiyBkS+DEFHeubahJuJ4DYw==}
+  '@kikiutils/nitro-session@3.0.1':
+    resolution: {integrity: sha512-63ytFL9ni0gDiecRq5rTQtaXjnfVibhMcjPzlufoxHLnBwbsuHo+qEyFfHIdzBttVzpn6rTWkWjKINN67GQR3g==}
     engines: {node: '>=18.12.1'}
 
   '@kwsites/file-exists@1.1.1':
@@ -2967,8 +2967,8 @@ packages:
     resolution: {integrity: sha512-OL/zLggRp8mFhKL0rNORUTR4yBYujK/uU+xZL+/0Rgm2QE4nLO9v8PzEweSJEbMGKmDRjJE4R3IMJlL2di4JeQ==}
     engines: {node: '>= 18'}
 
-  parse-json@8.2.0:
-    resolution: {integrity: sha512-eONBZy4hm2AgxjNFd8a4nyDJnzUAH0g34xSQAwWEVGCjdZ4ZL7dKZBfq267GWP/JaS9zW62Xs2FeAdDvpHHJGQ==}
+  parse-json@8.3.0:
+    resolution: {integrity: sha512-ybiGyvspI+fAoRQbIPRddCcSTV9/LsJbf0e/S85VLowVGzRmokfneg2kwVW/KU5rOXrPSbF1qAKPMgNTqqROQQ==}
     engines: {node: '>=18'}
 
   parse-path@7.0.1:
@@ -4633,7 +4633,7 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@kikiutils/eslint-config@0.12.0(@vue/compiler-sfc@3.5.13)(jiti@2.4.2)(tailwindcss@3.4.17)(typescript@5.8.3)(vue-eslint-parser@10.1.3(eslint@9.24.0(jiti@2.4.2)))':
+  '@kikiutils/eslint-config@0.12.2(@vue/compiler-sfc@3.5.13)(jiti@2.4.2)(tailwindcss@3.4.17)(typescript@5.8.3)(vue-eslint-parser@10.1.3(eslint@9.24.0(jiti@2.4.2)))':
     dependencies:
       '@antfu/eslint-config': 4.11.0(@vue/compiler-sfc@3.5.13)(eslint-plugin-format@1.0.1(eslint@9.24.0(jiti@2.4.2)))(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.3)
       '@kikiutils/eslint-plugin-tailwindcss': 3.19.0(tailwindcss@3.4.17)
@@ -4680,7 +4680,7 @@ snapshots:
       vue-eslint-parser: 10.1.3(eslint@9.24.0(jiti@2.4.2))
       xml-name-validator: 4.0.0
 
-  '@kikiutils/nitro-session@3.0.0(db0@0.3.1)(ioredis@5.6.0)':
+  '@kikiutils/nitro-session@3.0.1(db0@0.3.1)(ioredis@5.6.0)':
     dependencies:
       consola: 3.4.2
       lodash-es: 4.17.21
@@ -7678,7 +7678,7 @@ snapshots:
       es-module-lexer: 1.6.0
       slashes: 3.0.12
 
-  parse-json@8.2.0:
+  parse-json@8.3.0:
     dependencies:
       '@babel/code-frame': 7.26.2
       index-to-position: 1.1.0
@@ -7994,7 +7994,7 @@ snapshots:
     dependencies:
       '@types/normalize-package-data': 2.4.4
       normalize-package-data: 6.0.2
-      parse-json: 8.2.0
+      parse-json: 8.3.0
       type-fest: 4.39.1
       unicorn-magic: 0.1.0
 
