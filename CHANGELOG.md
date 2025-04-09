@@ -1,5 +1,19 @@
 # Changelog
 
+## v4.0.1
+
+[compare changes](https://github.com/kikiutils/nuxt-session/compare/v4.0.0...v4.0.1)
+
+### 🏡 Chore
+
+- Format code ([f3df409](https://github.com/kikiutils/nuxt-session/commit/f3df409))
+- Upgrade dependencies ([733e1be](https://github.com/kikiutils/nuxt-session/commit/733e1be))
+- Set `sideEffects` to false in package.json ([0c6d9df](https://github.com/kikiutils/nuxt-session/commit/0c6d9df))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v4.0.0
 
 [compare changes](https://github.com/kikiutils/nuxt-session/compare/v3.1.6...v4.0.0)
