@@ -4,4 +4,10 @@ import type { NitroApp } from 'nitropack/types';
 
 import { useRuntimeConfig } from '#imports';
 
-export default (nitroApp: NitroApp) => registerHooksAndSetupCachedHandlers(nitroApp, useRuntimeConfig().nuxtSession as Required<PluginOptions>, true);
+export default (nitroApp: NitroApp) => {
+    registerHooksAndSetupCachedHandlers(
+        nitroApp,
+        useRuntimeConfig().nuxtSession as Required<PluginOptions>,
+        true,
+    );
+};
