@@ -39,15 +39,15 @@
     "release": "pnpm run lint && pnpm run build && changelogen --hideAuthorEmail --push --release && npm publish"
   },
   "dependencies": {
-    "@kikiutils/nitro-session": "^2.0.6",
-    "@nuxt/kit": "^3.16.0"
+    "@kikiutils/nitro-session": "^3.0.0",
+    "@nuxt/kit": "^3.16.2"
   },
   "devDependencies": {
     "@kikiutils/changelogen": "^0.8.0",
-    "@kikiutils/eslint-config": "^0.8.3",
-    "@nuxt/module-builder": "^0.8.4",
-    "nuxt": "^3.16.0",
-    "typescript": "^5.8.2"
+    "@kikiutils/eslint-config": "^0.12.0",
+    "@nuxt/module-builder": "^1.0.1",
+    "nuxt": "^3.16.2",
+    "typescript": "^5.8.3"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
