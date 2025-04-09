@@ -1,5 +1,25 @@
 # Changelog
 
+## v4.0.0
+
+[compare changes](https://github.com/kikiutils/nuxt-session/compare/v3.1.6...v4.0.0)
+
+### 📦 Build
+
+- ⚠️ Drop CJS output and configure package as ESM in response to @nuxt/module-builder update ([0906d5f](https://github.com/kikiutils/nuxt-session/commit/0906d5f))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([67e83af](https://github.com/kikiutils/nuxt-session/commit/67e83af))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️ Drop CJS output and configure package as ESM in response to @nuxt/module-builder update ([0906d5f](https://github.com/kikiutils/nuxt-session/commit/0906d5f))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v3.1.6
 
 [compare changes](https://github.com/kikiutils/nuxt-session/compare/v3.1.5...v3.1.6)
