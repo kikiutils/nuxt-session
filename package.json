@@ -1,5 +1,6 @@
 {
   "name": "@kikiutils/nuxt-session",
+  "type": "module",
   "version": "3.1.6",
   "description": "Easy-to-use nuxt server-side session.",
   "author": "kiki-kanri",
@@ -15,12 +16,10 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/types.d.ts",
-      "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs"
+      "types": "./dist/types.d.mts",
+      "import": "./dist/module.mjs"
     }
   },
-  "types": "./dist/types.d.ts",
   "files": [
     "./dist"
   ],
